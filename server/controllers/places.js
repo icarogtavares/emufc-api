@@ -1,20 +1,20 @@
 import { assoc, equals } from 'ramda'
 
-class PlacesController {
+export default class PlacesController {
 
-  constructor(place) {
-    this.Place = place;
+  constructor(Place) {
+    this.Place = Place;
   }
 
   getAll(req, res, next) {
     this.Place.findAll({
       attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at']}
     })
-      .then(places => {
-        res.send(places);
-      })
+      .then(places => res.send(places))
       .catch(err => next(assoc('status', 400, err)));
   }
+
+  //getOne
 
   save(req, res, next) {
     this.Place.create(req.body)
@@ -53,5 +53,3 @@ class PlacesController {
   }
 
 }
-
-export default PlacesController;

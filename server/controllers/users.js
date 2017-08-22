@@ -1,18 +1,16 @@
-import { assoc } from 'ramda'
+import { assoc, equals } from 'ramda'
 
-class UsersController {
+export default class UsersController {
 
-  constructor(user) {
-    this.User = user;
+  constructor(User) {
+    this.User = User;
   }
 
   getAll(req, res, next) {
     this.User.findAll({
       attributes: ['id', 'username', 'email']
     })
-      .then(users => {
-        res.send(users);
-      })
+      .then(users => res.send(users))
       .catch(err => next(assoc('status', 400, err)));
   }
 
@@ -31,12 +29,10 @@ class UsersController {
       .then(rowsAffected => {
         if(equals(rowsAffected, 0)){
           return next();
-      }
-        res.sendStatus(204);
+        }
+        res.sendStatus(200);
       })
       .catch(err => next(assoc('status', 400, err)))
   }
 
 }
-
-export default UsersController;

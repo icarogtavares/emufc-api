@@ -1,5 +1,5 @@
 import db from '../../../models'
-import { dissoc, empty, assoc, toString } from 'ramda'
+import { empty, assoc, toString } from 'ramda'
 const {place: Place, equipment: Equipment} = db;
 
 describe('Routes: Place', () => {
@@ -102,8 +102,7 @@ describe('Routes: Place', () => {
         it('should update a place', done => {
             request.put('/places/1')
                 .send(fakePlace)
-                .expect(200)
-                .expect('Content-Type', /json/, done);
+                .expect(200, done);
         });
 
         it("shouldn't update with empty name", done => {
