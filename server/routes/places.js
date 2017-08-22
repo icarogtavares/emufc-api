@@ -12,5 +12,6 @@ router.route('/')
 
 router.route('/:id')
   .put((req, res, next) => placesController.update(req, res, next))
+  .delete((req, res, next) => placesController.delete(req, res, next))
   
 export default router;

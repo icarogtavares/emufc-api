@@ -131,4 +131,16 @@ describe('Routes: Place', () => {
                 .expect(400, done);
         });
     });
+
+    describe('# DELETE /places/{id}', () => {
+        it('should delete a place', done => {
+            request.delete('/places/1')
+                .expect(204, done);
+        });
+
+        it("shouldn't delete a place that does not exist", done => {
+            request.delete('/places/3')
+                .expect(404, done);
+        });
+    });
 });
