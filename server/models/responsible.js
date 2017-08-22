@@ -2,7 +2,10 @@ export default (sequelize, DataTypes) => {
   var responsible = sequelize.define('responsible', {
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
     },
     email: {
       type: DataTypes.STRING,

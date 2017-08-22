@@ -45,7 +45,7 @@ describe('Routes: User', () => {
     });
 
     describe('# GET /users', () => {
-        it('return a list of users', done => {
+        it('should return a list of users', done => {
             request.get("/users")
                 .expect(200)
                 .expect('Content-Type', /json/)

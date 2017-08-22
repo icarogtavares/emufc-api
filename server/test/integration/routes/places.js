@@ -43,7 +43,7 @@ describe('Routes: Place', () => {
     });
 
     describe('# GET /places', () => {
-        it('return a list of places', done => {
+        it('should return a list of places', done => {
             request.get("/places")
                 .expect(200)
                 .expect('Content-Type', /json/)

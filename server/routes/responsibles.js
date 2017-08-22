@@ -6,7 +6,8 @@ const responsiblesController = new ResponsiblesController(db.responsible);
 const router = express.Router();
 
 router.route('/')
-    .get((req, res, next) => responsiblesController.getAll(req, res, next));
+    .get((req, res, next) => responsiblesController.getAll(req, res, next))
+    .post((req, res, next) => responsiblesController.save(req, res, next));
 
 
 export default router;

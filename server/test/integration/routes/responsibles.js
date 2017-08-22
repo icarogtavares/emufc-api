@@ -1,3 +1,4 @@
+import { assoc, empty } from 'ramda'
 import db from '../../../models'
 const {responsible: Responsible, equipment: Equipment} = db;
 
@@ -62,5 +63,33 @@ describe('Routes: Responsible', () => {
                 });
         });
     });
+
+    describe('# POST /responsibles', () => {
+        it('should create a new responsible', done => {
+            request.post('/responsibles')
+                .send(fakeResponsible)
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.name).to.eql(fakeResponsible.name);
+                    expect(res.body.email).to.eql(fakeResponsible.email);
+                    expect(res.body.phone).to.eql(fakeResponsible.phone);
+                    done(err);
+                })
+        });
+
+        it("shouldn't create a new responsible with empty name", done => {
+            request.post('/responsibles')
+                .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))
+                .expect(400, done);
+        });
+
+        it("shouldn't create a new responsible with empty email", done => {
+            request.post('/responsibles')
+                .send(assoc('email', empty(fakeResponsible.latitude), fakeResponsible))
+                .expect(400, done);
+        });
+        
+    })
 
 });

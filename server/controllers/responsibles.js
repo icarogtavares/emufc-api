@@ -14,7 +14,11 @@ export default class ResponsiblesController {
             .catch(err => next(assoc('status', 400, err)));
     }
 
-
+    save(req, res, next) {
+        this.Responsible.create(req.body)
+            .then(responsible => res.send(responsible))
+            .catch(err => next(assoc('status', 400, err)));
+    }
 
 
 
