@@ -10,13 +10,6 @@ describe('Routes: Place', () => {
         longitude: -38.576372
     };
 
-//     const fakeUserWithInvalidEmail = {
-//         username: "josiaswando",
-//         email: "josias",
-//         password: "123456",
-//         access_token: "asdasdad"
-//     }
-
     const fakePlaces = [
         {
             name: "Departamento de Física - Bloco 929",
