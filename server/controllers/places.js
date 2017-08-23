@@ -6,7 +6,7 @@ export default class PlacesController {
     this.Place = Place;
   }
 
-  getAll(req, res, next) {
+  findAll(req, res, next) {
     this.Place.findAll({
       attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at']}
     })

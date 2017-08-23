@@ -1,4 +1,4 @@
-import { assoc, equals } from 'ramda'
+import { assoc, equals, isNil } from 'ramda'
 
 export default class ResponsiblesController {
 
@@ -6,11 +6,21 @@ export default class ResponsiblesController {
         this.Responsible = Responsible;
     }
 
-    getAll(req, res, next) {
+    findAll(req, res, next) {
         this.Responsible.findAll({
-            attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at']}
+            attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] }
           })
             .then(responsibles => res.send(responsibles))
+            .catch(err => next(assoc('status', 400, err)));
+    }
+
+    findOne(req, res, next) {
+        this.Responsible.findById(req.params.id, {
+            attributes : { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+        })
+            .then(responsible => {
+                isNil(responsible) ? next() : res.send(responsible);
+            })
             .catch(err => next(assoc('status', 400, err)));
     }
 
@@ -27,10 +37,7 @@ export default class ResponsiblesController {
             }
           })
             .then(rowsAffected => {
-              if(equals(rowsAffected, 0)){
-                  return next();
-              }
-              res.sendStatus(200);
+              equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
             })
             .catch(err => next(assoc('status', 400, err)))
     }

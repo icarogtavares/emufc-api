@@ -6,7 +6,7 @@ export default class UsersController {
     this.User = User;
   }
 
-  getAll(req, res, next) {
+  findAll(req, res, next) {
     this.User.findAll({
       attributes: ['id', 'username', 'email']
     })

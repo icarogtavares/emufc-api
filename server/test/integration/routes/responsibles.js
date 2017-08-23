@@ -43,7 +43,7 @@ describe('Routes: Responsible', () => {
     });
 
     describe('# GET /responsibles', () => {
-        it('return a list of responsibles', done => {
+        it('should return a list of responsibles', done => {
             request.get("/responsibles")
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -63,6 +63,30 @@ describe('Routes: Responsible', () => {
                 });
         });
     });
+
+    describe('# GET /responsibles/{id}', () => {
+        it('should return a responsible', done => {
+            request.get('/responsibles/1')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.name).to.eql(fakeResponsibles[0].name);
+                    expect(res.body.email).to.eql(fakeResponsibles[0].email);
+                    expect(res.body.phone).to.eql(fakeResponsibles[0].phone);
+                    expect(res.body).to.not.have.property('created_at');
+                    expect(res.body).to.not.have.property('updated_at');
+                    expect(res.body).to.not.have.property('deleted_at');
+                    done(err);
+                })      
+        });
+
+        describe('- contracts', () => {
+            it("shouldn't return a responsible that does not exist", done => {
+                request.get('/responsibles/3')
+                    .expect(404, done);
+            })
+        })
+    })
 
     describe('# POST /responsibles', () => {
         it('should create a new responsible', done => {
@@ -135,6 +159,11 @@ describe('Routes: Responsible', () => {
                 request.put('/responsibles/1')
                     .send(assoc('email', null, fakeResponsible))
                     .expect(400, done);
+            });
+
+            it("shouldn't update a responsible that does not exist", done => {
+                request.put('/responsibles/999')
+                    .expect(404, done);
             });
         });
     });
