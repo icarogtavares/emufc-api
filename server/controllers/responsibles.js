@@ -49,10 +49,7 @@ export default class ResponsiblesController {
           }
         })
           .then(rowsAffected => {
-            if(equals(rowsAffected, 0)){
-                return next();
-            }
-            res.sendStatus(204);
+            equals(rowsAffected, 0) ? next() : res.sendStatus(204);
         })
         .catch(err => next(assoc('status', 400, err)))
     }

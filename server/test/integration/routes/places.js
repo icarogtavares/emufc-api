@@ -64,6 +64,30 @@ describe('Routes: Place', () => {
         })
     });
 
+    describe('# GET /places/{id}', () => {
+        it('should return a place', done => {
+            request.get('/places/1')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.name).to.eql(fakePlaces[0].name);
+                    expect(res.body.latitude).to.eql(toString(fakePlaces[0].latitude));
+                    expect(res.body.longitude).to.eql(toString(fakePlaces[0].longitude));
+                    expect(res.body).to.not.have.property('created_at');
+                    expect(res.body).to.not.have.property('updated_at');
+                    expect(res.body).to.not.have.property('deleted_at');
+                    done(err);
+                })      
+        });
+
+        describe('- contracts', () => {
+            it("shouldn't return a place that does not exist", done => {
+                request.get('/places/3')
+                    .expect(404, done);
+            })
+        })
+    })
+
     describe('# POST /places', () => {
         it('should create a new place', done => {
             request.post('/places')
@@ -124,6 +148,11 @@ describe('Routes: Place', () => {
                 request.put('/places/1')
                     .send(assoc('longitude', null, fakePlace))
                     .expect(400, done);
+            });
+
+            it("shouldn't update a place that does not exist", done => {
+                request.put('/places/999')
+                    .expect(404, done);
             });
         })
     });

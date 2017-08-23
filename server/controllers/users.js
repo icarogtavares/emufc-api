@@ -1,4 +1,4 @@
-import { assoc, equals } from 'ramda'
+import { assoc, equals, isNil } from 'ramda'
 
 export default class UsersController {
 
@@ -8,10 +8,20 @@ export default class UsersController {
 
   findAll(req, res, next) {
     this.User.findAll({
-      attributes: ['id', 'username', 'email']
+      attributes : { exclude: ['password', 'created_at', 'updated_at', 'deleted_at'] }
     })
       .then(users => res.send(users))
       .catch(err => next(assoc('status', 400, err)));
+  }
+
+  findOne(req, res, next) {
+    this.User.findById(req.params.id, {
+        attributes : { exclude: ['password', 'created_at', 'updated_at', 'deleted_at'] }
+    })
+        .then(user => {
+          isNil(user) ? next() : res.send(user);
+        })
+        .catch(err => next(assoc('status', 400, err)));
   }
 
   save(req, res, next) {
@@ -27,10 +37,7 @@ export default class UsersController {
       }
     })
       .then(rowsAffected => {
-        if(equals(rowsAffected, 0)){
-          return next();
-        }
-        res.sendStatus(200);
+        equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
       })
       .catch(err => next(assoc('status', 400, err)))
   }

@@ -1,4 +1,4 @@
-import { assoc, equals } from 'ramda'
+import { assoc, equals, isNil } from 'ramda'
 
 export default class PlacesController {
 
@@ -14,7 +14,15 @@ export default class PlacesController {
       .catch(err => next(assoc('status', 400, err)));
   }
 
-  //getOne
+  findOne(req, res, next) {
+    this.Place.findById(req.params.id, {
+        attributes : { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+    })
+        .then(place => {
+            isNil(place) ? next() : res.send(place);
+        })
+        .catch(err => next(assoc('status', 400, err)));
+  }
 
   save(req, res, next) {
     this.Place.create(req.body)
@@ -29,10 +37,7 @@ export default class PlacesController {
       }
     })
       .then(rowsAffected => {
-        if(equals(rowsAffected, 0)){
-            return next();
-        }
-        res.sendStatus(200);
+        equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
       })
       .catch(err => next(assoc('status', 400, err)))
   }
@@ -44,10 +49,7 @@ export default class PlacesController {
       }
     })
       .then(rowsAffected => {
-        if(equals(rowsAffected, 0)){
-            return next();
-        }
-        res.sendStatus(204);
+        equals(rowsAffected, 0) ? next() : res.sendStatus(204);
       })
       .catch(err => next(assoc('status', 400, err)))
   }

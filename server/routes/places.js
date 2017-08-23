@@ -11,6 +11,7 @@ router.route('/')
   .post((req, res, next) => placesController.save(req, res, next));
 
 router.route('/:id')
+  .get((req, res, next) => placesController.findOne(req, res, next))
   .put((req, res, next) => placesController.update(req, res, next))
   .delete((req, res, next) => placesController.delete(req, res, next))
   

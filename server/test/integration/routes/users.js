@@ -52,16 +52,41 @@ describe('Routes: User', () => {
                 .end((err, res) => {
                     expect(res.body).to.have.length(2);
                     expect(res.body[0].username).to.eql(fakeUsers[0].username);
+                    expect(res.body[0].email).to.eql(fakeUsers[0].email);
                     expect(res.body[0]).to.not.have.property('created_at');
                     expect(res.body[0]).to.not.have.property('updated_at');
                     expect(res.body[0]).to.not.have.property('deleted_at');
 
                     expect(res.body[1].username).to.eql(fakeUsers[1].username);
+                    expect(res.body[1].email).to.eql(fakeUsers[1].email);
 
                     done(err);
                 });
         })
     });
+
+    describe('# GET /users/{id}', () => {
+        it('should return a user', done => {
+            request.get('/users/1')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.username).to.eql(fakeUsers[0].username);
+                    expect(res.body.email).to.eql(fakeUsers[0].email);
+                    expect(res.body).to.not.have.property('created_at');
+                    expect(res.body).to.not.have.property('updated_at');
+                    expect(res.body).to.not.have.property('deleted_at');
+                    done(err);
+                });
+        });
+
+        describe('- contracts', () => {
+            it("shouldn't return a user that does not exist", done => {
+                request.get('/users/3')
+                    .expect(404, done);
+            })
+        })
+    })
 
     describe('# POST /users', () => {
         it('should create a new user', done => {
@@ -127,6 +152,11 @@ describe('Routes: User', () => {
                 request.put('/users/1')
                     .send(assoc('email', empty(fakeUser.email), fakeUser))
                     .expect(400, done);
+            });
+
+            it("shouldn't update an user that does not exist", done => {
+                request.put('/users/999')
+                    .expect(404, done);
             });
         })
     });
