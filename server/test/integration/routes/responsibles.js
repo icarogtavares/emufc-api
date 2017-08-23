@@ -139,4 +139,16 @@ describe('Routes: Responsible', () => {
         });
     });
 
+    describe('# DELETE /responsibles/{id}', () => {
+        it('should delete a responsible', done => {
+            request.delete('/responsibles/1')
+                .expect(204, done);
+        });
+
+        it("shouldn't delete a responsible that does not exist", done => {
+            request.delete('/responsibles/3')
+                .expect(404, done);
+        });
+    });
+
 });

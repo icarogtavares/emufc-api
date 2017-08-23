@@ -10,7 +10,8 @@ router.route('/')
     .post((req, res, next) => responsiblesController.save(req, res, next));
 
 router.route('/:id')
-    .put((req, res, next) => responsiblesController.update(req, res, next));
+    .put((req, res, next) => responsiblesController.update(req, res, next))
+    .delete((req, res, next) => responsiblesController.delete(req, res, next));
 
 
 export default router;
