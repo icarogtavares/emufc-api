@@ -76,29 +76,31 @@ describe('Routes: User', () => {
                 });
         });
 
-        it("shouldn't create a new user with invalid email", done => {
-            request.post('/users')
-                .send(fakeUserWithInvalidEmail)
-                .expect(400, done);
-        });
-
-        it("shouldn't create a new user with duplicated email", done => {
-            request.post('/users')
-                .send(fakeUsers[0])
-                .expect(400, done);
-        });
-
-        it("shouldn't create a new user without email", done => {
-            request.post('/users')
-                .send(dissoc('email', fakeUser))
-                .expect(400, done);
-        });
-
-        it("shouldn't create a new user with empty email", done => {
-            request.post('/users')
-            .send(assoc('email', empty(fakeUser.email), fakeUser))
-                .expect(400, done);
-        });
+        describe('- contracts', () => {
+            it("shouldn't create a new user with invalid email", done => {
+                request.post('/users')
+                    .send(fakeUserWithInvalidEmail)
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new user with duplicated email", done => {
+                request.post('/users')
+                    .send(fakeUsers[0])
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new user without email", done => {
+                request.post('/users')
+                    .send(dissoc('email', fakeUser))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new user with empty email", done => {
+                request.post('/users')
+                .send(assoc('email', empty(fakeUser.email), fakeUser))
+                    .expect(400, done);
+            });
+        })
     });
 
     describe('# PUT /users/{id}', () => {
@@ -108,22 +110,24 @@ describe('Routes: User', () => {
                 .expect(200, done);
         });
 
-        it("souldn't update with invalid e-mail", done => {
-            request.put('/users/1')
-                .send(fakeUserWithInvalidEmail)
-                .expect(400, done);
+        describe('- contracts', () => {
+            it("souldn't update with invalid e-mail", done => {
+                request.put('/users/1')
+                    .send(fakeUserWithInvalidEmail)
+                    .expect(400, done);
+            })
+    
+            it("shouldn't update with duplicated email", done => {
+                request.put('/users/2')
+                    .send(fakeUsers[0])
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with empty email", done => {
+                request.put('/users/1')
+                    .send(assoc('email', empty(fakeUser.email), fakeUser))
+                    .expect(400, done);
+            });
         })
-
-        it("shouldn't update with duplicated email", done => {
-            request.put('/users/2')
-                .send(fakeUsers[0])
-                .expect(400, done);
-        });
-
-        it("shouldn't update with empty email", done => {
-            request.put('/users/1')
-                .send(assoc('email', empty(fakeUser.email), fakeUser))
-                .expect(400, done);
-        });
     });
 });

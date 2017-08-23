@@ -78,7 +78,7 @@ describe('Routes: Responsible', () => {
                 })
         });
        
-        describe('# contracts', () => {
+        describe('- contracts', () => {
             it("shouldn't create a new responsible with empty name", done => {
                 request.post('/responsibles')
                     .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))
@@ -112,7 +112,7 @@ describe('Routes: Responsible', () => {
                 .expect(200, done);
         });
 
-        describe('# contracts', () => {
+        describe('- contracts', () => {
             it("shouldn't update with empty name", done => {
                 request.put('/responsibles/1')
                     .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))

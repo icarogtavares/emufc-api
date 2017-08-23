@@ -78,23 +78,25 @@ describe('Routes: Place', () => {
                 });
         });
 
-        it("shouldn't create a new place with empty name", done => {
-            request.post('/places')
-                .send(assoc('name', empty(fakePlace.name), fakePlace))
-                .expect(400, done);
-        });
-
-        it("shouldn't create a new place with empty latitude", done => {
-            request.post('/places')
-                .send(assoc('longitude', empty(fakePlace.latitude), fakePlace))
-                .expect(400, done);
-        });
-
-        it("shouldn't create a new place with empty longitude", done => {
-            request.post('/places')
-                .send(assoc('longitude', empty(fakePlace.longitude), fakePlace))
-                .expect(400, done);
-        });
+        describe('- contracts', () => {
+            it("shouldn't create a new place with empty name", done => {
+                request.post('/places')
+                    .send(assoc('name', empty(fakePlace.name), fakePlace))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new place with empty latitude", done => {
+                request.post('/places')
+                    .send(assoc('longitude', empty(fakePlace.latitude), fakePlace))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new place with empty longitude", done => {
+                request.post('/places')
+                    .send(assoc('longitude', empty(fakePlace.longitude), fakePlace))
+                    .expect(400, done);
+            });
+        })
 
     });
 
@@ -105,23 +107,25 @@ describe('Routes: Place', () => {
                 .expect(200, done);
         });
 
-        it("shouldn't update with empty name", done => {
-            request.put('/places/1')
-                .send(assoc('name', empty(fakePlace.name), fakePlace))
-                .expect(400, done);
-        });
-
-        it("shouldn't update with null latitude", done => {
-            request.put('/places/1')
-                .send(assoc('longitude', null, fakePlace))
-                .expect(400, done);
-        });
-
-        it("shouldn't update with null longitude", done => {
-            request.put('/places/1')
-                .send(assoc('longitude', null, fakePlace))
-                .expect(400, done);
-        });
+        describe('- contracts', () => {
+            it("shouldn't update with empty name", done => {
+                request.put('/places/1')
+                    .send(assoc('name', empty(fakePlace.name), fakePlace))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null latitude", done => {
+                request.put('/places/1')
+                    .send(assoc('longitude', null, fakePlace))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null longitude", done => {
+                request.put('/places/1')
+                    .send(assoc('longitude', null, fakePlace))
+                    .expect(400, done);
+            });
+        })
     });
 
     describe('# DELETE /places/{id}', () => {
