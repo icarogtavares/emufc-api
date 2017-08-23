@@ -77,19 +77,66 @@ describe('Routes: Responsible', () => {
                     done(err);
                 })
         });
+       
+        describe('# contracts', () => {
+            it("shouldn't create a new responsible with empty name", done => {
+                request.post('/responsibles')
+                    .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new responsible with empty email", done => {
+                request.post('/responsibles')
+                    .send(assoc('email', empty(fakeResponsible.email), fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new responsible with name null", done => {
+                request.post('/responsibles')
+                    .send(assoc('name', null, fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new responsible with email null", done => {
+                request.post('/responsibles')
+                    .send(assoc('email', null, fakeResponsible))
+                    .expect(400, done);
+            });
+        });
+    });
 
-        it("shouldn't create a new responsible with empty name", done => {
-            request.post('/responsibles')
-                .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))
-                .expect(400, done);
+    describe('# PUT /responsibles/{id}', () => {
+        it('should update a responsible', done => {
+            request.put('/responsibles/1')
+                .send(fakeResponsible)
+                .expect(200, done);
         });
 
-        it("shouldn't create a new responsible with empty email", done => {
-            request.post('/responsibles')
-                .send(assoc('email', empty(fakeResponsible.latitude), fakeResponsible))
-                .expect(400, done);
+        describe('# contracts', () => {
+            it("shouldn't update with empty name", done => {
+                request.put('/responsibles/1')
+                    .send(assoc('name', empty(fakeResponsible.name), fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with empty email", done => {
+                request.put('/responsibles/1')
+                    .send(assoc('email', empty(fakeResponsible.email), fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null name", done => {
+                request.put('/responsibles/1')
+                    .send(assoc('name', null, fakeResponsible))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null email", done => {
+                request.put('/responsibles/1')
+                    .send(assoc('email', null, fakeResponsible))
+                    .expect(400, done);
+            });
         });
-        
-    })
+    });
 
 });

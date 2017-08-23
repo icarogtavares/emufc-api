@@ -23,7 +23,7 @@ export default (sequelize, DataTypes) => {
       associate: function(models) {
         responsible.hasMany(models.equipment, {
           foreignKey: 'responsible_id',
-          as: 'equipments'
+          as: 'responsible'
         });
       }
     }

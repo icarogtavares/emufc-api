@@ -102,7 +102,7 @@ describe('Routes: User', () => {
     });
 
     describe('# PUT /users/{id}', () => {
-        it('should update a user', done => {
+        it('should update an user', done => {
             request.put('/users/1')
                 .send(fakeUser)
                 .expect(200, done);
