@@ -1,7 +1,7 @@
 import { genSaltSync, hashSync, compareSync } from 'bcrypt'
 
 export default (sequelize, DataTypes) => {
-  const user = sequelize.define('user', {
+  let user = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,14 +37,12 @@ export default (sequelize, DataTypes) => {
         const salt = genSaltSync();
         user.password = hashSync(user.password, salt);
       }
-    },
-    classMethods: {
-      associate: models => {
-      },
-      isPassword: (encodedPassword, password) => {
-        return compareSync(password, encodedPassword);
-      }
     }
   });
+
+  user.isPassword = (encodedPassword, password) => {
+    return compareSync(password, encodedPassword);
+  }
+
   return user;
 };

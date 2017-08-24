@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const responsible = sequelize.define('responsible', {
+  let responsible = sequelize.define('responsible', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -18,15 +18,14 @@ export default (sequelize, DataTypes) => {
     phone: DataTypes.STRING
   }, {
     timestamps: true,
-    paranoid: true,
-    classMethods: {
-      associate: models => {
-        responsible.hasMany(models.equipment, {
-          foreignKey: 'responsible_id',
-          as: 'equipments'
-        });
-      }
-    }
+    paranoid: true
   });
+
+  responsible.associate = models => {
+    responsible.hasMany(models.equipment, {
+      foreignKey: 'place_id'
+    });
+  };
+
   return responsible;
 };
