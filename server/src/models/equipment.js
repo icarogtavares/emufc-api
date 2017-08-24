@@ -1,9 +1,7 @@
 export default (sequelize, DataTypes) => {
   const equipment = sequelize.define('equipment', {
     name: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    place_id: DataTypes.INTEGER,
-    responsible_id: DataTypes.INTEGER
+    description: DataTypes.TEXT
   }, {
     timestamps: true,
     paranoid: true,

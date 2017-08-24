@@ -1,6 +1,5 @@
 import db from '../../../src/models'
 import { empty, assoc, toString } from 'ramda'
-import { parallel } from 'async'
 import * as Promise from 'bluebird'
 const {responsible: Responsible, place: Place, equipment: Equipment} = db;
 
