@@ -9,11 +9,11 @@
 - Place hasMany Equipment
 
 ## Testes
-- **Todos os testes: **
+- **Todos os testes:**
   ```sh
   $ sudo yarn run test
   ```
-- **Teste somente nas rotas equipment : **
+- **Teste somente nas rotas equipment:**
   ```sh
   $ sudo yarn run test-equipmens
   ```
