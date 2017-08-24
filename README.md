@@ -23,27 +23,27 @@ $ sudo yarn
 
 Want to contribute? Great!
 
-Please, first configure `./server/src/config/database.js` file or use configured variables before running commands.
+**Please, first configure `./server/src/config/database.js` file or use configured variables before running commands.**
 
 If you need to run `migrate script` configure `./server/src/config/database.js` too.
 
-To run the app in development mode:
+- **To run the app in development mode:**
 ```sh
 $ sudo yarn run dev
 ```
 
-Running the app in production mode:
+- **Running the app in production mode:**
 ```sh
 $ sudo yarn run migrate
 $ sudo yarn start
 ```
 
-Running all tests:
+- **Running all tests:**
 ```sh
 $ sudo yarn test
 ```
 
-Running test only on `equipment` routes:
+- **Running test only on `equipment` routes:**
 ```sh
 $ sudo yarn test-equipments
 ```
