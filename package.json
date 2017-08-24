@@ -12,9 +12,10 @@
     "start": "node --inspect ./build/src/server.js",
     "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon --exec 'babel-node' ./server/src/server.js",
     "migrate": "npm run build && sequelize db:migrate",
-    "test": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/**/*.js -w"
+    "test": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/*.js -w",
+    "test-equipments": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/equipments.js -w"
   },
-  "author": "Icaro Tavares <icaro.tav4@gmail.com",
+  "author": "Icaro Tavares <icaro.tav4@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "async": "^2.5.0",

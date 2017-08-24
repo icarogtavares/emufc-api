@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  var responsible = sequelize.define('responsible', {
+  const responsible = sequelize.define('responsible', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,10 +20,9 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     paranoid: true,
     classMethods: {
-      associate: function(models) {
+      associate: models => {
         responsible.hasMany(models.equipment, {
-          foreignKey: 'responsible_id',
-          as: 'responsible'
+          foreignKey: 'responsible_id'
         });
       }
     }

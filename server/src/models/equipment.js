@@ -1,17 +1,21 @@
 export default (sequelize, DataTypes) => {
-  var equipment = sequelize.define('equipment', {
+  const equipment = sequelize.define('equipment', {
     name: DataTypes.STRING,
-    description: DataTypes.TEXT
+    description: DataTypes.TEXT,
+    place_id: DataTypes.INTEGER,
+    responsible_id: DataTypes.INTEGER
   }, {
     timestamps: true,
     paranoid: true,
     classMethods: {
-      associate: function(models) {
+      associate: models => {
         equipment.belongsTo(models.place, {
-          foreignKey: 'place_id'
+          foreignKey: 'place_id',
+          as: 'place'
         });
         equipment.belongsTo(models.responsible, {
-          foreignKey: 'responsible_id'
+          foreignKey: 'responsible_id',
+          as: 'responsible'
         });
       }
     }

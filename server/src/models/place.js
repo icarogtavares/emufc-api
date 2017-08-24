@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  var place = sequelize.define('place', {
+  let place = sequelize.define('place', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -25,10 +25,9 @@ export default (sequelize, DataTypes) => {
     timestamps: true,
     paranoid: true,
     classMethods: {
-      associate: function(models) {
+      associate: models => {
         place.hasMany(models.equipment, {
-          foreignKey: 'place_id',
-          as: 'place'
+          foreignKey: 'place_id'
         });
       }
     }
