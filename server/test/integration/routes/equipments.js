@@ -71,7 +71,7 @@ describe('Routes: Equipment', () => {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
-                    console.log(res.body)
+                    console.log(JSON.stringify(res.body, null, 2));
                     expect(res.body).to.have.length(2);
                     expect(res.body[0].name).to.eql(fakeEquipments[0].name);
                     expect(res.body[0].description).to.eql(fakeEquipments[0].description);
