@@ -11,10 +11,7 @@ export default class EquipmentsController {
     findAll(req, res, next) {
         this.Equipment.findAll({
             attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            include: [{ all: true, nested: true }]
-            // include: [{
-            //     model: this.Place
-            // }]
+            include: [{ all: true, nested: true, attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] } }]
           })
             .then(equipments => res.send(equipments))
             .catch(err => next(assoc('status', 400, err)));

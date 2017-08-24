@@ -6,12 +6,14 @@ const {responsible: Responsible, place: Place, equipment: Equipment} = db;
 describe('Routes: Equipment', () => {
 
     const fakePlace = {
+        id: 1,
         name: "Departamento da Computação",
-        latitude: -3.747014,
-        longitude: -38.576372
+        latitude: "-3.747014",
+        longitude: "-38.576372"
     };
 
     const fakeResponsible = {
+        id: 1,
         name: "João de Sousa Neto",
         email: "joao@gmail.com",
         phone: "+55 85 9 9999-9999"
@@ -39,21 +41,14 @@ describe('Routes: Equipment', () => {
         }
     ]
 
-    const syncPlaces = Place.sync({force: true})
-        .then(() => Place.create(fakePlace))
-
-    const syncResponsibles =  Responsible.sync({force: true})
-        .then(() => Responsible.create(fakeResponsible))
-
     before(done => {
+        
         Equipment.drop()
-        .then(() => Promise.all([syncPlaces, syncResponsibles]))
-        .then(() => {
-            done();
-        })
-        .catch(err => {
-            done(err);
-        });
+            .then(() => Promise.all([Responsible.sync({force: true}), Place.sync({force: true})]))
+            .then(() => Promise.all([Place.create(fakePlace), Responsible.create(fakeResponsible)]))
+            .then(() => done())
+            .catch(err => done(err));
+
     });
 
     beforeEach(done => {
@@ -73,15 +68,18 @@ describe('Routes: Equipment', () => {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
-                    console.log(JSON.stringify(res.body, null, 2));
                     expect(res.body).to.have.length(2);
                     expect(res.body[0].name).to.eql(fakeEquipments[0].name);
-                    expect(res.body[0].description).to.eql(fakeEquipments[0].description);
+                    expect(res.body[0].description).to.eql(fakeEquipments[0].description)
+                    expect(res.body[0].place).to.eql(fakePlace);
+                    expect(res.body[0].responsible).to.eql(fakeResponsible);
                     expect(res.body[0]).to.not.have.property('created_at');
                     expect(res.body[0]).to.not.have.property('updated_at');
                     expect(res.body[0]).to.not.have.property('deleted_at');
                     expect(res.body[1].name).to.eql(fakeEquipments[1].name);
                     expect(res.body[1].description).to.eql(fakeEquipments[1].description);
+                    expect(res.body[1].place).to.eql(fakePlace);
+                    expect(res.body[1].responsible).to.eql(fakeResponsible);
                     done(err);
                 });
         })
