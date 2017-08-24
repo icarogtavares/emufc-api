@@ -9,5 +9,11 @@
 - Place hasMany Equipment
 
 ## Testes
-- Todos os testes: sudo yarn run test
-- Teste somente nas rotas equipment : sudo yarn run test-equipmens
+- *Todos os testes: *
+  ```sh
+  $ sudo yarn run test
+  ```
+- *Teste somente nas rotas equipment : *
+  ```sh
+  $ sudo yarn run test-equipmens
+  ```
