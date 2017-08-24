@@ -46,11 +46,14 @@ describe('Routes: Equipment', () => {
         .then(() => Responsible.create(fakeResponsible))
 
     before(done => {
-        Promise.all([syncPlaces, syncResponsibles])
-            .then(() => {
-                done()
-            })
-            .catch(err => done(err));
+        Equipment.drop()
+        .then(() => Promise.all([syncPlaces, syncResponsibles]))
+        .then(() => {
+            done();
+        })
+        .catch(err => {
+            done(err);
+        });
     });
 
     beforeEach(done => {
