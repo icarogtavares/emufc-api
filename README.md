@@ -23,6 +23,12 @@ $ sudo yarn
 
 Want to contribute? Great!
 
+**Model Associations:**
+
+- `Place` has many `Equipment`.
+- `Responsible` has many `Equipment`
+- `Equipment` belongs to `Place` and `Responsible`.
+
 **Please, first configure `./server/src/config/database.js` file or use configured variables before running commands.**
 
 If you need to run `migrate script` configure `./server/src/config/database.js` too.
