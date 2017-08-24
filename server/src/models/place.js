@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  let place = sequelize.define('place', {
+  const place = sequelize.define('place', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
