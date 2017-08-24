@@ -22,7 +22,8 @@ export default (sequelize, DataTypes) => {
     classMethods: {
       associate: models => {
         responsible.hasMany(models.equipment, {
-          foreignKey: 'responsible_id'
+          foreignKey: 'responsible_id',
+          as: 'equipments'
         });
       }
     }

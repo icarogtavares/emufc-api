@@ -13,8 +13,7 @@ export default class EquipmentsController {
             attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] },
             include: [{ all: true, nested: true }]
             // include: [{
-            //     model: this.Place,
-            //     as: 'place'
+            //     model: this.Place
             // }]
           })
             .then(equipments => res.send(equipments))
