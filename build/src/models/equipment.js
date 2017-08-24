@@ -5,21 +5,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = (sequelize, DataTypes) => {
-  var equipment = sequelize.define('equipment', {
+  const equipment = sequelize.define('equipment', {
     name: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {
     timestamps: true,
     paranoid: true,
     classMethods: {
-      associate: function (models) {
+      associate: models => {
         equipment.belongsTo(models.place, {
           foreignKey: 'place_id',
-          as: 'places'
+          as: 'place'
         });
         equipment.belongsTo(models.responsible, {
           foreignKey: 'responsible_id',
-          as: 'responsibles'
+          as: 'responsible'
         });
       }
     }

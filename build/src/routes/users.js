@@ -22,6 +22,8 @@ const router = _express2.default.Router();
 
 const usersController = new _users2.default(_models2.default.user);
 
-router.route('/').get((req, res, next) => usersController.getAll(req, res, next)).post(usersController.save);
+router.route('/').get((req, res, next) => usersController.findAll(req, res, next)).post((req, res, next) => usersController.save(req, res, next));
+
+router.route('/:id').get((req, res, next) => usersController.findOne(req, res, next)).put((req, res, next) => usersController.update(req, res, next));
 
 exports.default = router;

@@ -50,7 +50,7 @@ const configureExpress = exports.configureExpress = () => {
 
   if (app.get('env') === 'production') {
     app.use((0, _morgan2.default)('common'));
-  } else {
+  } else if (app.get('env') === 'development') {
     app.use((0, _morgan2.default)('dev'));
   }
 

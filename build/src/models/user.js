@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", {
 var _bcrypt = require('bcrypt');
 
 exports.default = (sequelize, DataTypes) => {
-  var user = sequelize.define('user', {
+  const user = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,7 +26,13 @@ exports.default = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    password: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
     access_token: DataTypes.STRING
   }, {
     timestamps: true,
@@ -38,7 +44,7 @@ exports.default = (sequelize, DataTypes) => {
       }
     },
     classMethods: {
-      associate: function (models) {},
+      associate: models => {},
       isPassword: (encodedPassword, password) => {
         return (0, _bcrypt.compareSync)(password, encodedPassword);
       }

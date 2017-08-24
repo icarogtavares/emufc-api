@@ -9,11 +9,11 @@ export default (sequelize, DataTypes) => {
       associate: models => {
         equipment.belongsTo(models.place, {
           foreignKey: 'place_id',
-          as: 'place'
+          as: 'Place'
         });
         equipment.belongsTo(models.responsible, {
           foreignKey: 'responsible_id',
-          as: 'responsible'
+          as: 'Responsible'
         });
       }
     }
