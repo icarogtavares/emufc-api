@@ -15,7 +15,7 @@
     "test": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/*.js -w",
     "test-equipments": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/equipments.js -w"
   },
-  "author": "Icaro Tavares <icaro.tav4@gmail.com>",
+  "author": "Icaro Tavares <icarotavares@live.com>",
   "license": "ISC",
   "dependencies": {
     "async": "^2.5.0",
