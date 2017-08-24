@@ -1,4 +1,4 @@
-import db from '../../../models'
+import db from '../../../src/models'
 import { empty, assoc, toString } from 'ramda'
 const {place: Place, equipment: Equipment} = db;
 

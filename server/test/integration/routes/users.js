@@ -1,4 +1,4 @@
-import db from '../../../models'
+import db from '../../../src/models'
 import { dissoc, empty, assoc } from 'ramda'
 const {user: User} = db;
 

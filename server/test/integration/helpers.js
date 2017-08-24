@@ -1,6 +1,6 @@
 import supertest from 'supertest'
 import chai from 'chai'
-import { configureExpress } from '../../bin/middlewares'
+import { configureExpress } from '../../src/bin/middlewares'
 var app = configureExpress();
 
 global.app = app;
