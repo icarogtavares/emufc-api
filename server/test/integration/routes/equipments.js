@@ -138,6 +138,18 @@ describe('Routes: Equipment', () => {
                     .expect(400, done);
             });
     
+            it("shouldn't create a new equipment with null name", done => {
+                request.post('/equipments')
+                    .send(assoc('name', null, fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new equipment with null description", done => {
+                request.post('/equipments')
+                    .send(assoc('description', null, fakeEquipment))
+                    .expect(400, done);
+            });
+
             it("shouldn't create a new equipment with a null place", done => {
                 request.post('/equipments')
                     .send(assoc('place_id', null, fakeEquipment))
@@ -158,7 +170,50 @@ describe('Routes: Equipment', () => {
                 .send(fakeEquipment)
                 .expect(200, done);
         });
-    });
 
+        describe('- contracts', () => {
+            it("shouldn't update with empty name", done => {
+                request.put('/equipments/1')
+                    .send(assoc('name', empty(fakeEquipment.name), fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with empty description", done => {
+                request.put('/equipments/1')
+                    .send(assoc('description', empty(fakeEquipment.description), fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null name", done => {
+                request.put('/equipments/1')
+                    .send(assoc('name', null, fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null description", done => {
+                request.put('/equipments/1')
+                    .send(assoc('description', null, fakeEquipment))
+                    .expect(400, done);
+            });
+
+            it("shouldn't update with null place", done => {
+                request.put('/equipments/1')
+                    .send(assoc('place_id', null, fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't update with null responsible", done => {
+                request.put('/equipments/1')
+                    .send(assoc('responsible_id', null, fakeEquipment))
+                    .expect(400, done);
+            });
+
+            it("shouldn't update a equipment that does not exist", done => {
+                request.put('/equipments/999')
+                    .expect(404, done);
+            });
+        });
+
+    });
 
 });
