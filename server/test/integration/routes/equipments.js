@@ -125,7 +125,31 @@ describe('Routes: Equipment', () => {
                 })
         });
        
-        
+        describe('- contracts', () => {
+            it("shouldn't create a new equipment with empty name", done => {
+                request.post('/equipments')
+                    .send(assoc('name', empty(fakeEquipment.name), fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new equipment with empty description", done => {
+                request.post('/equipments')
+                    .send(assoc('description', empty(fakeEquipment.description), fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new equipment with a null place", done => {
+                request.post('/equipments')
+                    .send(assoc('place_id', null, fakeEquipment))
+                    .expect(400, done);
+            });
+    
+            it("shouldn't create a new equipment with a null responsible", done => {
+                request.post('/equipments')
+                    .send(assoc('responsible_id', null, fakeEquipment))
+                    .expect(400, done);
+            });
+        });
     });
 
 

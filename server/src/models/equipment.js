@@ -1,7 +1,19 @@
 export default (sequelize, DataTypes) => {
   let equipment = sequelize.define('equipment', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {
     timestamps: true,
     paranoid: true
@@ -9,10 +21,17 @@ export default (sequelize, DataTypes) => {
 
   equipment.associate = models => {
     equipment.belongsTo(models.place, {
-      foreignKey: 'place_id'
+      foreignKey: {
+        name: 'place_id',
+        allowNull: false
+      },
+      allowNull: false
     });
     equipment.belongsTo(models.responsible, {
-      foreignKey: 'responsible_id'
+      foreignKey: {
+        name: 'responsible_id',
+        allowNull: false
+      }
     });
   };
 
