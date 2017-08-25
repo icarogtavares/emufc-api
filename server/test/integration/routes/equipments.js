@@ -82,6 +82,33 @@ describe('Routes: Equipment', () => {
                     expect(res.body[1].responsible).to.eql(fakeResponsible);
                     done(err);
                 });
-        })
+        });
     });
+
+    describe('# GET /equipments/{id}', () => {
+        it('should return a equipment', done => {
+            request.get('/equipments/1')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.name).to.eql(fakeEquipments[0].name);
+                    expect(res.body.description).to.eql(fakeEquipments[0].description)
+                    expect(res.body.place).to.eql(fakePlace);
+                    expect(res.body.responsible).to.eql(fakeResponsible);
+                    expect(res.body).to.not.have.property('created_at');
+                    expect(res.body).to.not.have.property('updated_at');
+                    expect(res.body).to.not.have.property('deleted_at');
+                    done(err);
+                })      
+        });
+
+        describe('- contracts', () => {
+            it("shouldn't return a responsible that does not exist", done => {
+                request.get('/equipments/3')
+                    .expect(404, done);
+            });
+        });
+    });
+
+
 });
