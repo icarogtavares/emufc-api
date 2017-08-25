@@ -6,6 +6,16 @@ Object.defineProperty(exports, "__esModule", {
 
 var _ramda = require('ramda');
 
+var _jsonwebtoken = require('jsonwebtoken');
+
+var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
+var _config = require('../config/config');
+
+var _config2 = _interopRequireDefault(_config);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 class UsersController {
 
   constructor(User) {
@@ -42,20 +52,16 @@ class UsersController {
 
   login(req, res, next) {
 
-    async.waterfall([callback => {
-      this.User.findOne({
-        where: {
-          email: req.body.email
-        }
-      }).then(user => {
-        if ((0, _ramda.isNil)(user)) return callback({ msg: 'Usuário inválido.' });
+    this.User.findOne({
+      where: {
+        username: req.body.username
+      }
+    }).then(user => {
+      if ((0, _ramda.isNil)(user)) throw new Error('User does not exist!');
 
-        callback(err, user);
-      }).catch(err => callback(err));
-    }, (user, callback) => {
       if (this.User.isPassword(user.password, req.body.password)) {
         const payload = { id: user.id };
-        const token = jwt.sign(payload, cfg.security.jwtSecret, { expiresIn: '7d' });
+        const token = _jsonwebtoken2.default.sign(payload, _config2.default.security.jwtSecret, { expiresIn: '7d' });
         this.User.update({
           access_token: token
         }, {
@@ -63,16 +69,13 @@ class UsersController {
             id: user.id
           }
         }).then(rowsAffected => {
-          (0, _ramda.equals)(rowsAffected[0], 0) ? callback({ msg: "Usuário não encontra-se mais no banco" }) : callback(null, token);
-        }).catch(err => callback(err));
-      } else {
-        callback({ msg: "Senha inválida." });
+          if ((0, _ramda.equals)(rowsAffected[0], 0)) {
+            throw new Error('Usuário não encontra-se mais no banco.');
+          }
+          res.send({ token: token });
+        });
       }
-    }], (err, token) => {
-      if (err) return next((0, _ramda.assoc)('status', 400, err));
-
-      res.send({ token: token });
-    });
+    }).catch(err => next((0, _ramda.assoc)('status', 400, err)));
   }
 
 }

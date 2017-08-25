@@ -28,6 +28,14 @@ var _login = require('./login');
 
 var _login2 = _interopRequireDefault(_login);
 
+var _version = require('./version');
+
+var _version2 = _interopRequireDefault(_version);
+
+var _mobile = require('./mobile');
+
+var _mobile2 = _interopRequireDefault(_mobile);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = _express2.default.Router();
@@ -36,7 +44,9 @@ router.use('/users', _users2.default);
 router.use('/places', _places2.default);
 router.use('/responsibles', _responsibles2.default);
 router.use('/equipments', _equipments2.default);
-router.use('/login', loginRoutes);
+router.use('/login', _login2.default);
+router.use('/version', _version2.default);
+router.use('/mobile', _mobile2.default);
 
 router.get('/', (req, res, next) => {
   res.send({ index: 'index route' });

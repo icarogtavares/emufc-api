@@ -13,10 +13,6 @@ var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
 
-var _cookieParser = require('cookie-parser');
-
-var _cookieParser2 = _interopRequireDefault(_cookieParser);
-
 var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
@@ -24,10 +20,6 @@ var _bodyParser2 = _interopRequireDefault(_bodyParser);
 var _helmet = require('helmet');
 
 var _helmet2 = _interopRequireDefault(_helmet);
-
-var _compression = require('compression');
-
-var _compression2 = _interopRequireDefault(_compression);
 
 var _cors = require('cors');
 
@@ -53,7 +45,7 @@ const configureExpress = exports.configureExpress = () => {
   app.set('port', process.env.PORT || '3000');
 
   if (app.get('env') === 'production') {
-    app.use((0, _morgan2.default)('common'));
+    // app.use(logger('common'));
   } else if (app.get('env') === 'development') {
     app.use((0, _morgan2.default)('dev'));
   }
@@ -61,20 +53,18 @@ const configureExpress = exports.configureExpress = () => {
   app.use((0, _helmet2.default)());
   app.use(_helmet2.default.noCache());
   app.use((0, _cors2.default)());
-  app.use((0, _compression2.default)());
   app.use(_bodyParser2.default.json());
   app.use(_bodyParser2.default.urlencoded({ extended: false }));
-  app.use((0, _cookieParser2.default)());
 
   app.use((0, _auth2.default)().initialize());
 
-  app.use((req, res, next) => {
-    delete req.body.id;
-    delete req.body.created_at;
-    delete req.body.updated_at;
-    delete req.body.deleted_at;
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   delete req.body.id;
+  //   delete req.body.created_at
+  //   delete req.body.updated_at;
+  //   delete req.body.deleted_at;
+  //   next();
+  // });
 
   app.use('/', _routes2.default);
 

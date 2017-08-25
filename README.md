@@ -4,6 +4,7 @@
 
 * [Babel](https://babeljs.io/) to translate the written code into the javascript supported by [NodeJS](https://nodejs.org/en/).
 * [Mocha](https://mochajs.org/) with [Chai](http://chaijs.com/) for tests.
+* [Loadtest](https://github.com/alexfernandez/loadtest) for loadtests.
 * [Yarn](https://yarnpkg.com/en/) to download npm dependecies.
 * [Sequelize](http://docs.sequelizejs.com/) as ORM with [MySQL](https://www.mysql.com/) as database with [Sequelize-CLI](https://github.com/sequelize/cli) helping to create models/migration files and execute them.
 
@@ -39,6 +40,14 @@ $ sudo yarn start
 - **Running tests:**
 ```sh
 $ sudo yarn test
+```
+
+- **Running loadtest:**
+
+You need to start the server and run the tests on another terminal.
+
+```sh
+$ sudo yarn loadtest
 ```
 
 **Model Associations:**

@@ -16,6 +16,7 @@ const up = exports.up = (queryInterface, Sequelize) => {
       type: Sequelize.STRING
     },
     email: {
+      unique: true,
       allowNull: false,
       type: Sequelize.STRING
     },

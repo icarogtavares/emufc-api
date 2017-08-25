@@ -1,9 +1,6 @@
-import path from 'path'
 import logger from 'morgan'
-import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import helmet from 'helmet'
-import compression from 'compression'
 import cors from 'cors'
 import express from 'express'
 
@@ -15,19 +12,15 @@ export const configureExpress = () => {
 
   app.set('port', process.env.PORT || '3000');
 
-  if (app.get('env') === 'production') {
-    app.use(logger('common'));
-  } else if (app.get('env') === 'development') {
+  if (app.get('env') === 'development') {
     app.use(logger('dev'));
   }
 
   app.use(helmet());
   app.use(helmet.noCache());
   app.use(cors());
-  app.use(compression());
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
-  app.use(cookieParser());
 
   app.use(auth().initialize());
 
