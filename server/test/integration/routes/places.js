@@ -1,5 +1,5 @@
 import db from '../../../src/models'
-import { empty, assoc, toString } from 'ramda'
+import { empty, assoc } from 'ramda'
 const {place: Place, equipment: Equipment} = db;
 
 describe('Routes: Place', () => {
@@ -57,8 +57,8 @@ describe('Routes: Place', () => {
                     expect(res.body[0]).to.not.have.property('deleted_at');
 
                     expect(res.body[1].name).to.eql(fakePlaces[1].name);
-                    expect(res.body[1].latitude).to.eql(toString(fakePlaces[1].latitude));
-                    expect(res.body[1].longitude).to.include(toString(fakePlaces[1].longitude));
+                    expect(res.body[1].latitude).to.eql(fakePlaces[1].latitude);
+                    expect(res.body[1].longitude).to.include(fakePlaces[1].longitude);
                     done(err);
                 });
         })
@@ -71,8 +71,8 @@ describe('Routes: Place', () => {
                 .expect('Content-Type', /json/)
                 .end((err, res) => {
                     expect(res.body.name).to.eql(fakePlaces[0].name);
-                    expect(res.body.latitude).to.eql(toString(fakePlaces[0].latitude));
-                    expect(res.body.longitude).to.eql(toString(fakePlaces[0].longitude));
+                    expect(res.body.latitude).to.eql(fakePlaces[0].latitude);
+                    expect(res.body.longitude).to.eql(fakePlaces[0].longitude);
                     expect(res.body).to.not.have.property('created_at');
                     expect(res.body).to.not.have.property('updated_at');
                     expect(res.body).to.not.have.property('deleted_at');

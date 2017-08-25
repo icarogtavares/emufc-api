@@ -1,5 +1,5 @@
 import db from '../../../src/models'
-import { empty, assoc, toString } from 'ramda'
+import { empty, assoc } from 'ramda'
 import * as Promise from 'bluebird'
 const {responsible: Responsible, place: Place, equipment: Equipment} = db;
 
