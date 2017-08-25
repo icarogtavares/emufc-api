@@ -50,8 +50,8 @@ describe('Routes: Place', () => {
                 .end((err, res) => {
                     expect(res.body).to.have.length(2);
                     expect(res.body[0].name).to.eql(fakePlaces[0].name);
-                    expect(res.body[0].latitude).to.eql(toString(fakePlaces[0].latitude));
-                    expect(res.body[0].longitude).to.eql(toString(fakePlaces[0].longitude));
+                    expect(res.body[0].latitude).to.eql(fakePlaces[0].latitude);
+                    expect(res.body[0].longitude).to.eql(fakePlaces[0].longitude);
                     expect(res.body[0]).to.not.have.property('created_at');
                     expect(res.body[0]).to.not.have.property('updated_at');
                     expect(res.body[0]).to.not.have.property('deleted_at');
