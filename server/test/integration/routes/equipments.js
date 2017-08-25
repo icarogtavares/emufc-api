@@ -86,7 +86,7 @@ describe('Routes: Equipment', () => {
     });
 
     describe('# GET /equipments/{id}', () => {
-        it('should return a equipment', done => {
+        it('should return an equipment', done => {
             request.get('/equipments/1')
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -103,7 +103,7 @@ describe('Routes: Equipment', () => {
         });
 
         describe('- contracts', () => {
-            it("shouldn't return a equipment that does not exist", done => {
+            it("shouldn't return an equipment that does not exist", done => {
                 request.get('/equipments/3')
                     .expect(404, done);
             });
@@ -165,7 +165,7 @@ describe('Routes: Equipment', () => {
     });
 
     describe('# PUT /equipments/{id}', () => {
-        it('should update a equipment', done => {
+        it('should update an equipment', done => {
             request.put('/equipments/1')
                 .send(fakeEquipment)
                 .expect(200, done);
@@ -208,12 +208,24 @@ describe('Routes: Equipment', () => {
                     .expect(400, done);
             });
 
-            it("shouldn't update a equipment that does not exist", done => {
+            it("shouldn't update an equipment that does not exist", done => {
                 request.put('/equipments/999')
                     .expect(404, done);
             });
         });
 
+    });
+
+    describe('# DELETE /equipments/{id}', () => {
+        it('should delete an equipment', done => {
+            request.delete('/equipments/1')
+                .expect(204, done);
+        });
+
+        it("shouldn't delete an equipment that does not exist", done => {
+            request.delete('/equipments/3')
+                .expect(404, done);
+        });
     });
 
 });
