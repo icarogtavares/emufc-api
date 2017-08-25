@@ -28,12 +28,14 @@ describe('Routes: Equipment', () => {
 
     const fakeEquipments = [
         {
+            id: 1,
             name: "Witec alpha300",
             description: "Imagens Raman confocal\nResolução nominal de 200-300nm\nResolução 3D excepcional\nImagens Raman ultra-rápidas (0.76ms)",
             place_id: 1,
             responsible_id: 1
         },
         {
+            id: 2,
             name: "MEV Inspect S50 - FEI",
             description: "Resolução nominal de 3nm\nAnálise de superfícies de materiais em alto e baixo vácuo\nEDS e Litografia de elétrons",
             place_id: 1,

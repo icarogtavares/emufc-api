@@ -14,18 +14,18 @@ describe('Routes: Place', () => {
 
     const fakePlace = {
         name: "Departamento da Computação",
-        latitude: -3.747014,
-        longitude: -38.576372
+        latitude: "-3.747014",
+        longitude: "-38.576372"
     };
 
     const fakePlaces = [{
         name: "Departamento de Física - Bloco 929",
-        latitude: -3.747014,
-        longitude: -38.576372
+        latitude: "-3.747014",
+        longitude: "-38.576372"
     }, {
         name: "Departamento de Física - Bloco 929",
-        latitude: -3.747052,
-        longitude: -38.5766
+        latitude: "-3.747052",
+        longitude: "-38.5766"
     }];
 
     before(done => {

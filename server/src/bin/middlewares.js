@@ -30,6 +30,9 @@ export const configureExpress = () => {
 
   app.use((req, res, next) => {
     delete req.body.id;
+    delete req.body.created_at
+    delete req.body.updated_at;
+    delete req.body.deleted_at;
     next();
   });
 

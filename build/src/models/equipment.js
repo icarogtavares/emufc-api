@@ -5,24 +5,41 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = (sequelize, DataTypes) => {
-  const equipment = sequelize.define('equipment', {
-    name: DataTypes.STRING,
-    description: DataTypes.TEXT
-  }, {
-    timestamps: true,
-    paranoid: true,
-    classMethods: {
-      associate: models => {
-        equipment.belongsTo(models.place, {
-          foreignKey: 'place_id',
-          as: 'place'
-        });
-        equipment.belongsTo(models.responsible, {
-          foreignKey: 'responsible_id',
-          as: 'responsible'
-        });
+  let equipment = sequelize.define('equipment', {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        notEmpty: true
       }
     }
+  }, {
+    timestamps: true,
+    paranoid: true
   });
+
+  equipment.associate = models => {
+    equipment.belongsTo(models.place, {
+      foreignKey: {
+        name: 'place_id',
+        allowNull: false
+      },
+      allowNull: false
+    });
+    equipment.belongsTo(models.responsible, {
+      foreignKey: {
+        name: 'responsible_id',
+        allowNull: false
+      }
+    });
+  };
+
   return equipment;
 };

@@ -29,15 +29,14 @@ exports.default = (sequelize, DataTypes) => {
     }
   }, {
     timestamps: true,
-    paranoid: true,
-    classMethods: {
-      associate: models => {
-        place.hasMany(models.equipment, {
-          foreignKey: 'place_id',
-          as: 'equipments'
-        });
-      }
-    }
+    paranoid: true
   });
+
+  place.associate = models => {
+    place.hasMany(models.equipment, {
+      foreignKey: 'place_id'
+    });
+  };
+
   return place;
 };

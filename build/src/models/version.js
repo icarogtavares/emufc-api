@@ -5,14 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = (sequelize, DataTypes) => {
-  const version = sequelize.define('version', {
+  let version = sequelize.define('version', {
     current: DataTypes.INTEGER
   }, {
     timestamps: true,
-    createdAt: false,
-    classMethods: {
-      associate: models => {}
-    }
+    createdAt: false
   });
   return version;
 };
