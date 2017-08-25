@@ -43,4 +43,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+if(process.env.NODE_ENV !== 'test') {
+  sequelize.sync();
+}
+
 export default db;

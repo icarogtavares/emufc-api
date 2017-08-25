@@ -15,7 +15,13 @@ export default (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    phone: DataTypes.STRING
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true
+      }
+    }
   }, {
     timestamps: true,
     paranoid: true

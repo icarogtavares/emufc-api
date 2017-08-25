@@ -23,15 +23,7 @@ $ sudo yarn
 
 Want to contribute? Great!
 
-**Model Associations:**
-
-- `Place` has many `Equipment`.
-- `Responsible` has many `Equipment`
-- `Equipment` belongs to `Place` and `Responsible`.
-
 **Please, first configure `./server/src/config/database.js` file or use configured variables before running commands.**
-
-If you need to run `migrate script` configure `./server/src/config/database.js` too.
 
 - **To run the app in development mode:**
 ```sh
@@ -40,16 +32,17 @@ $ sudo yarn run dev
 
 - **Running the app in production mode:**
 ```sh
-$ sudo yarn run migrate
+$ sudo yarn run build
 $ sudo yarn start
 ```
 
-- **Running all tests:**
+- **Running tests:**
 ```sh
 $ sudo yarn test
 ```
 
-- **Running test only on `equipment` routes:**
-```sh
-$ sudo yarn test-equipments
-```
+**Model Associations:**
+
+- `Place` has many `Equipment`.
+- `Responsible` has many `Equipment`
+- `Equipment` belongs to `Place` and `Responsible`.
