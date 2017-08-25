@@ -40,5 +40,40 @@ class UsersController {
     }).catch(err => next((0, _ramda.assoc)('status', 400, err)));
   }
 
+  login(req, res, next) {
+
+    async.waterfall([callback => {
+      this.User.findOne({
+        where: {
+          email: req.body.email
+        }
+      }).then(user => {
+        if ((0, _ramda.isNil)(user)) return callback({ msg: 'Usuário inválido.' });
+
+        callback(err, user);
+      }).catch(err => callback(err));
+    }, (user, callback) => {
+      if (this.User.isPassword(user.password, req.body.password)) {
+        const payload = { id: user.id };
+        const token = jwt.sign(payload, cfg.security.jwtSecret, { expiresIn: '7d' });
+        this.User.update({
+          access_token: token
+        }, {
+          where: {
+            id: user.id
+          }
+        }).then(rowsAffected => {
+          (0, _ramda.equals)(rowsAffected[0], 0) ? callback({ msg: "Usuário não encontra-se mais no banco" }) : callback(null, token);
+        }).catch(err => callback(err));
+      } else {
+        callback({ msg: "Senha inválida." });
+      }
+    }], (err, token) => {
+      if (err) return next((0, _ramda.assoc)('status', 400, err));
+
+      res.send({ token: token });
+    });
+  }
+
 }
 exports.default = UsersController;

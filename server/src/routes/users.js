@@ -12,6 +12,6 @@ router.route('/')
 
 router.route('/:id')
   .get((req, res, next) => usersController.findOne(req, res, next))
-  .put((req, res, next) => usersController.update(req, res, next))
+  .put((req, res, next) => usersController.update(req, res, next));
   
 export default router;

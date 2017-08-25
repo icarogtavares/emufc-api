@@ -24,6 +24,10 @@ var _equipments = require('./equipments');
 
 var _equipments2 = _interopRequireDefault(_equipments);
 
+var _login = require('./login');
+
+var _login2 = _interopRequireDefault(_login);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = _express2.default.Router();
@@ -32,6 +36,7 @@ router.use('/users', _users2.default);
 router.use('/places', _places2.default);
 router.use('/responsibles', _responsibles2.default);
 router.use('/equipments', _equipments2.default);
+router.use('/login', loginRoutes);
 
 router.get('/', (req, res, next) => {
   res.send({ index: 'index route' });

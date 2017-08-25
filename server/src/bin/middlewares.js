@@ -8,6 +8,7 @@ import cors from 'cors'
 import express from 'express'
 
 import routes from '../routes/'
+import auth from './auth'
 
 export const configureExpress = () => {
   var app = express();
@@ -27,6 +28,8 @@ export const configureExpress = () => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cookieParser());
+
+  app.use(auth().initialize());
 
   app.use((req, res, next) => {
     delete req.body.id;

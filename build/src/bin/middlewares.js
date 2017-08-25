@@ -41,6 +41,10 @@ var _routes = require('../routes/');
 
 var _routes2 = _interopRequireDefault(_routes);
 
+var _auth = require('./auth');
+
+var _auth2 = _interopRequireDefault(_auth);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const configureExpress = exports.configureExpress = () => {
@@ -61,6 +65,8 @@ const configureExpress = exports.configureExpress = () => {
   app.use(_bodyParser2.default.json());
   app.use(_bodyParser2.default.urlencoded({ extended: false }));
   app.use((0, _cookieParser2.default)());
+
+  app.use((0, _auth2.default)().initialize());
 
   app.use((req, res, next) => {
     delete req.body.id;

@@ -1,4 +1,6 @@
 import { assoc, equals, isNil } from 'ramda'
+import jwt from 'jsonwebtoken'
+import cfg from '../config/config'
 
 export default class UsersController {
 
@@ -41,5 +43,37 @@ export default class UsersController {
       })
       .catch(err => next(assoc('status', 400, err)))
   }
+
+  login(req, res, next) {
+
+    this.User.findOne({
+      where: {
+        username: req.body.username
+      }
+    })
+      .then(user => {
+        if(isNil(user))
+          throw new Error('User does not exist!');
+
+        if(this.User.isPassword(user.password, req.body.password)) {
+          const payload = { id : user.id };
+          const token = jwt.sign(payload, cfg.security.jwtSecret, {expiresIn: '7d'});
+          this.User.update({
+            access_token: token
+          }, {
+            where : {
+              id : user.id
+            }
+          })
+            .then(rowsAffected => {
+              if(equals(rowsAffected[0], 0)) {
+                throw new Error('Usuário não encontra-se mais no banco.')
+              }
+              res.send({token: token})
+            })
+        }
+      })
+        .catch(err => next(assoc('status', 400, err)));
+	}
 
 }

@@ -47,15 +47,15 @@ describe('Routes: Place', () => {
             request.get("/places").expect(200).expect('Content-Type', /json/).end((err, res) => {
                 expect(res.body).to.have.length(2);
                 expect(res.body[0].name).to.eql(fakePlaces[0].name);
-                expect(res.body[0].latitude).to.eql((0, _ramda.toString)(fakePlaces[0].latitude));
-                expect(res.body[0].longitude).to.eql((0, _ramda.toString)(fakePlaces[0].longitude));
+                expect(res.body[0].latitude).to.eql(fakePlaces[0].latitude);
+                expect(res.body[0].longitude).to.eql(fakePlaces[0].longitude);
                 expect(res.body[0]).to.not.have.property('created_at');
                 expect(res.body[0]).to.not.have.property('updated_at');
                 expect(res.body[0]).to.not.have.property('deleted_at');
 
                 expect(res.body[1].name).to.eql(fakePlaces[1].name);
-                expect(res.body[1].latitude).to.eql((0, _ramda.toString)(fakePlaces[1].latitude));
-                expect(res.body[1].longitude).to.include((0, _ramda.toString)(fakePlaces[1].longitude));
+                expect(res.body[1].latitude).to.eql(fakePlaces[1].latitude);
+                expect(res.body[1].longitude).to.include(fakePlaces[1].longitude);
                 done(err);
             });
         });
@@ -65,8 +65,8 @@ describe('Routes: Place', () => {
         it('should return a place', done => {
             request.get('/places/1').expect(200).expect('Content-Type', /json/).end((err, res) => {
                 expect(res.body.name).to.eql(fakePlaces[0].name);
-                expect(res.body.latitude).to.eql((0, _ramda.toString)(fakePlaces[0].latitude));
-                expect(res.body.longitude).to.eql((0, _ramda.toString)(fakePlaces[0].longitude));
+                expect(res.body.latitude).to.eql(fakePlaces[0].latitude);
+                expect(res.body.longitude).to.eql(fakePlaces[0].longitude);
                 expect(res.body).to.not.have.property('created_at');
                 expect(res.body).to.not.have.property('updated_at');
                 expect(res.body).to.not.have.property('deleted_at');
