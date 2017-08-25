@@ -152,6 +152,13 @@ describe('Routes: Equipment', () => {
         });
     });
 
+    describe('# PUT /equipments/{id}', () => {
+        it('should update a equipment', done => {
+            request.put('/equipments/1')
+                .send(fakeEquipment)
+                .expect(200, done);
+        });
+    });
 
 
 });
