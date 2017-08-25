@@ -103,12 +103,31 @@ describe('Routes: Equipment', () => {
         });
 
         describe('- contracts', () => {
-            it("shouldn't return a responsible that does not exist", done => {
+            it("shouldn't return a equipment that does not exist", done => {
                 request.get('/equipments/3')
                     .expect(404, done);
             });
         });
     });
+
+    describe('# POST /equipments', () => {
+        it('should create a new equipment', done => {
+            request.post('/equipments')
+                .send(fakeEquipment)
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .end((err, res) => {
+                    expect(res.body.name).to.eql(fakeEquipment.name);
+                    expect(res.body.description).to.eql(fakeEquipment.description)
+                    expect(res.body.place_id).to.eql(fakeEquipment.place_id);
+                    expect(res.body.responsible_id).to.eql(fakeEquipment.responsible_id);
+                    done(err);
+                })
+        });
+       
+        
+    });
+
 
 
 });
