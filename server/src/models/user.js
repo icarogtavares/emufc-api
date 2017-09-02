@@ -1,4 +1,4 @@
-import { genSaltSync, hashSync, compareSync } from 'bcrypt'
+import { genSaltSync, hashSync } from 'bcrypt'
 
 export default (sequelize, DataTypes) => {
   let user = sequelize.define('user', {
@@ -39,10 +39,6 @@ export default (sequelize, DataTypes) => {
       }
     }
   });
-
-  user.isPassword = (encodedPassword, password) => {
-    return compareSync(password, encodedPassword);
-  }
 
   return user;
 };

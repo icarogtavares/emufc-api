@@ -1,17 +1,14 @@
 import express from 'express'
-import UsersController from '../controllers/users'
-import db from '../models/'
+import * as usersController from '../controllers/users'
 
 const router = express.Router();
 
-const usersController = new UsersController(db.user);
-
 router.route('/')
-  .get((req, res, next) => usersController.findAll(req, res, next))
-  .post((req, res, next) => usersController.save(req, res, next));
+  .get(usersController.findAll)
+  .post(usersController.save)
 
 router.route('/:id')
-  .get((req, res, next) => usersController.findOne(req, res, next))
-  .put((req, res, next) => usersController.update(req, res, next));
+  .get(usersController.findOne)
+  .put(usersController.update)
   
 export default router;
