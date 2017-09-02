@@ -12,18 +12,14 @@ var _places = require('../controllers/places');
 
 var _places2 = _interopRequireDefault(_places);
 
-var _models = require('../models/');
-
-var _models2 = _interopRequireDefault(_models);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = _express2.default.Router();
 
-const placesController = new _places2.default(_models2.default.place);
+const placesController = new _places2.default();
 
-router.route('/').get((req, res, next) => placesController.findAll(req, res, next)).post((req, res, next) => placesController.save(req, res, next));
+router.route('/').get(placesController.findAll).post(placesController.save);
 
-router.route('/:id').get((req, res, next) => placesController.findOne(req, res, next)).put((req, res, next) => placesController.update(req, res, next)).delete((req, res, next) => placesController.delete(req, res, next));
+router.route('/:id').get(placesController.findById).put(placesController.update).delete(placesController.delete);
 
 exports.default = router;

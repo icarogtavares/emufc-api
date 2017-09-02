@@ -1,57 +1,38 @@
 import { assoc, equals, isNil } from 'ramda'
+import * as responsiblesService from '../services/responsibles'
 
-export default class ResponsiblesController {
+export const findAll = (req, res, next) => {
+    responsiblesService.findAll()
+        .then(responsibles => res.send(responsibles))
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    constructor(Responsible) {
-        this.Responsible = Responsible;
-    }
-
-    findAll(req, res, next) {
-        this.Responsible.findAll({
-            attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] }
-          })
-            .then(responsibles => res.send(responsibles))
-            .catch(err => next(assoc('status', 400, err)));
-    }
-
-    findOne(req, res, next) {
-        this.Responsible.findById(req.params.id, {
-            attributes : { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+export const findOne = (req, res, next) => {
+    responsiblesService.findById(req.params.id)
+        .then(responsible => {
+            isNil(responsible) ? next() : res.send(responsible);
         })
-            .then(responsible => {
-                isNil(responsible) ? next() : res.send(responsible);
-            })
-            .catch(err => next(assoc('status', 400, err)));
-    }
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    save(req, res, next) {
-        this.Responsible.create(req.body)
-            .then(responsible => res.send(responsible))
-            .catch(err => next(assoc('status', 400, err)));
-    }
+export const save = (req, res, next) => {
+    responsiblesService.create(req.body)
+        .then(responsible => res.send(responsible))
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    update(req, res, next) {
-        this.Responsible.update(req.body, {
-            where: {
-              id: req.params.id
-            }
-          })
-            .then(rowsAffected => {
-              equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
-            })
-            .catch(err => next(assoc('status', 400, err)))
-    }
-
-    delete(req, res, next) {
-        this.Responsible.destroy({
-          where: {
-            id: req.params.id
-          }
+export const update = (req, res, next) => {
+    responsiblesService.update(req.params.id, req.body)
+        .then(rowsAffected => {
+            equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
         })
-          .then(rowsAffected => {
+        .catch(err => next(assoc('status', 400, err)))
+}
+
+export const remove = (req, res, next) => {
+    responsiblesService.remove(req.params.id)
+        .then(rowsAffected => {
             equals(rowsAffected, 0) ? next() : res.sendStatus(204);
         })
         .catch(err => next(assoc('status', 400, err)))
-    }
-
 }

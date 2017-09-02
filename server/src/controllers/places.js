@@ -1,57 +1,39 @@
 import { assoc, equals, isNil } from 'ramda'
+import * as placesService from '../services/places'
 
-export default class PlacesController {
+export const findAll = (req, res, next) => {
 
-  constructor(Place) {
-    this.Place = Place;
-  }
+  placesService.findAll()
+    .then(places => res.send(places))
+    .catch(err => next(assoc('status', 400, err)));
+}
 
-  findAll(req, res, next) {
-    this.Place.findAll({
-      attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at']}
+export const findById = (req, res, next) => {
+
+  placesService.findById(req.params.id)
+    .then(place => {
+        isNil(place) ? next() : res.send(place);
     })
-      .then(places => res.send(places))
-      .catch(err => next(assoc('status', 400, err)));
-  }
+    .catch(err => next(assoc('status', 400, err)));
+}
+export const save = (req, res, next) => {
+  placesService.create(req.body)
+    .then(place => res.status(201).send(place))
+    .catch(err => next(assoc('status', 400, err)));
+}
 
-  findOne(req, res, next) {
-    this.Place.findById(req.params.id, {
-        attributes : { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+export const update = (req, res, next) => {
+  placesService.update(req.params.id, req.body)
+    .then(rowsAffected => {
+      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
     })
-        .then(place => {
-            isNil(place) ? next() : res.send(place);
-        })
-        .catch(err => next(assoc('status', 400, err)));
-  }
+    .catch(err => next(assoc('status', 400, err)))
+}
 
-  save(req, res, next) {
-    this.Place.create(req.body)
-      .then(place => res.status(201).send(place))
-      .catch(err => next(assoc('status', 400, err)));
-  }
-
-  update(req, res, next) {
-    this.Place.update(req.body, {
-      where: {
-        id: req.params.id
-      }
+export const remove = (req, res, next) => {
+  placesService.remove(req.params.id)
+    .then(rowsAffected => {
+      equals(rowsAffected, 0) ? next() : res.sendStatus(204);
     })
-      .then(rowsAffected => {
-        equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
-      })
-      .catch(err => next(assoc('status', 400, err)))
-  }
-
-  delete(req, res, next) {
-    this.Place.destroy({
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(rowsAffected => {
-        equals(rowsAffected, 0) ? next() : res.sendStatus(204);
-      })
-      .catch(err => next(assoc('status', 400, err)))
-  }
-
+    .catch(err => next(assoc('status', 400, err)))
 }

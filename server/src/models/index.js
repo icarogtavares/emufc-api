@@ -1,6 +1,7 @@
 import fs        from 'fs'
 import path      from 'path'
 import Sequelize from 'sequelize'
+import * as Promise from 'bluebird'
 import getConfig from '../config/database'
 
 const basename  = path.basename(module.filename);
@@ -45,6 +46,10 @@ db.Sequelize = Sequelize;
 
 if(process.env.NODE_ENV !== 'test') {
   sequelize.sync();
+}
+
+export function getModel(modelName) {
+  return Promise.resolve(db[modelName]);
 }
 
 export default db;

@@ -1,18 +1,15 @@
 import express from 'express'
-import PlacesController from '../controllers/places'
-import db from '../models/'
+import * as placeController from '../controllers/places'
 
 const router = express.Router();
 
-const placesController = new PlacesController(db.place);
-
 router.route('/')
-  .get((req, res, next) => placesController.findAll(req, res, next))
-  .post((req, res, next) => placesController.save(req, res, next));
+  .get(placeController.findAll)
+  .post(placeController.save);
 
 router.route('/:id')
-  .get((req, res, next) => placesController.findOne(req, res, next))
-  .put((req, res, next) => placesController.update(req, res, next))
-  .delete((req, res, next) => placesController.delete(req, res, next))
+  .get(placeController.findById)
+  .put(placeController.update)
+  .delete(placeController.remove)
   
 export default router;

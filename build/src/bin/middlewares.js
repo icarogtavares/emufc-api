@@ -5,10 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.configureExpress = undefined;
 
-var _path = require('path');
-
-var _path2 = _interopRequireDefault(_path);
-
 var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
@@ -44,9 +40,7 @@ const configureExpress = exports.configureExpress = () => {
 
   app.set('port', process.env.PORT || '3000');
 
-  if (app.get('env') === 'production') {
-    // app.use(logger('common'));
-  } else if (app.get('env') === 'development') {
+  if (app.get('env') === 'development') {
     app.use((0, _morgan2.default)('dev'));
   }
 
@@ -58,13 +52,13 @@ const configureExpress = exports.configureExpress = () => {
 
   app.use((0, _auth2.default)().initialize());
 
-  // app.use((req, res, next) => {
-  //   delete req.body.id;
-  //   delete req.body.created_at
-  //   delete req.body.updated_at;
-  //   delete req.body.deleted_at;
-  //   next();
-  // });
+  app.use((req, res, next) => {
+    delete req.body.id;
+    delete req.body.created_at;
+    delete req.body.updated_at;
+    delete req.body.deleted_at;
+    next();
+  });
 
   app.use('/', _routes2.default);
 
