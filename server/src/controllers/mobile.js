@@ -1,43 +1,27 @@
 import { assoc } from 'ramda'
 import * as Promise from 'bluebird'
+import * as equipmentsService from '../services/equipments'
+import * as responsiblesService from '../services/responsibles'
+import * as placesService from '../services/places'
+import * as versionService from '../services/version'
 
-export default class MobileController {
+export const findAll = (req, res, next) => {
+    const equipments = equipmentsService.findAll();
+    const responsibles = responsiblesService.findAll();
+    const places = placesService.findAll();
 
-    constructor(Version, Equipment, Place, Responsible) {
-        this.Version = Version;
-        this.Equipment = Equipment;
-        this.Place = Place;
-        this.Responsible = Responsible;
-    }
+    versionService.currentVersion()
+        .then(version => {
+            if(version.current > req.get('VERSION')){
+                return Promise.all([equipments, responsibles, places])
+            }
 
-    findAll(req, res, next) {
-        const equipments = this.Equipment.findAll({
-            attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            where: { deleted_at: null }
-        });
-        const responsibles = this.Responsible.findAll({
-            attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            where: { deleted_at: null }
-        });
-        const places = this.Place.findAll({
-            attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            where: { deleted_at: null }
-        });
-
-        this.Version.findById(1)
-            .then(version => {
-                if(version.current > req.get('VERSION')){
-                    return Promise.all([equipments, responsibles, places])
-                }
-
-                throw new Error('Already up to date.');
-            })
-            .then(([equipments, responsibles, places]) => res.send({
-                equipments: equipments,
-                responsibles: responsibles,
-                places: places
-            }))
-            .catch(err => next(assoc('status', 400, err)));
-    }
-
+            throw new Error('Already up to date.');
+        })
+        .then(([equipments, responsibles, places]) => res.send({
+            equipments: equipments,
+            responsibles: responsibles,
+            places: places
+        }))
+        .catch(err => next(assoc('status', 400, err)));
 }
