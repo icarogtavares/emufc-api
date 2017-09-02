@@ -17,7 +17,7 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ cd emufc-api
-$ sudo yarn
+$ yarn
 ```
 
 ### Development
@@ -28,18 +28,18 @@ Want to contribute? Great!
 
 - **To run the app in development mode:**
 ```sh
-$ sudo yarn run dev
+$ yarn run dev
 ```
 
 - **Running the app in production mode:**
 ```sh
-$ sudo yarn run build
-$ sudo yarn start
+$ yarn run build
+$ yarn start
 ```
 
 - **Running tests:**
 ```sh
-$ sudo yarn test
+$ yarn test
 ```
 
 - **Running loadtest:**
@@ -47,7 +47,7 @@ $ sudo yarn test
 You need to start the server and run the tests on another terminal.
 
 ```sh
-$ sudo yarn loadtest
+$ yarn loadtest
 ```
 
 **Model Associations:**
