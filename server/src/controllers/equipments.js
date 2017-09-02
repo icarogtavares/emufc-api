@@ -1,61 +1,38 @@
 import { assoc, equals, isNil } from 'ramda'
+import * as equipmentsService from '../services/equipments'
 
-export default class EquipmentsController {
+export const findAll = (req, res, next) => {
+    equipmentsService.findAll()
+        .then(equipments => res.send(equipments))
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    constructor(Equipment, Place, Responsible) {
-        this.Equipment = Equipment;
-        this.Place = Place;
-        this.Responsible = Responsible;
-    }
-
-    findAll(req, res, next) {
-        this.Equipment.findAll({
-            attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            include: [{ all: true, nested: true, attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] } }]
-          })
-            .then(equipments => res.send(equipments))
-            .catch(err => next(assoc('status', 400, err)));
-    }
-
-    findOne(req, res, next) {
-        this.Equipment.findById(req.params.id, {
-            attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] },
-            include: [{ all: true, nested: true, attributes:{ exclude: ['created_at', 'updated_at', 'deleted_at'] } }]
+export const findOne = (req, res, next) => {
+    equipmentsService.findById(req.params.id)
+        .then(equipment => {
+            isNil(equipment) ? next() : res.send(equipment);
         })
-            .then(equipment => {
-                isNil(equipment) ? next() : res.send(equipment);
-            })
-            .catch(err => next(assoc('status', 400, err)));
-    }
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    save(req, res, next) {
-        this.Equipment.create(req.body)
-            .then(equipment => res.send(equipment))
-            .catch(err => next(assoc('status', 400, err)));
-    }
+export const save = (req, res, next) => {
+    equipmentsService.create(req.body)
+        .then(equipment => res.send(equipment))
+        .catch(err => next(assoc('status', 400, err)));
+}
 
-    update(req, res, next) {
-        this.Equipment.update(req.body, {
-            where: {
-              id: req.params.id
-            }
-          })
-            .then(rowsAffected => {
-              equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
-            })
-            .catch(err => next(assoc('status', 400, err)))
-    }
-
-    delete(req, res, next) {
-        this.Equipment.destroy({
-          where: {
-            id: req.params.id
-          }
-        })
-          .then(rowsAffected => {
-            equals(rowsAffected, 0) ? next() : res.sendStatus(204);
+export const update = (req, res, next) => {
+    equipmentsService.update(req.params.id, req.body)
+        .then(rowsAffected => {
+            equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
         })
         .catch(err => next(assoc('status', 400, err)))
-    }
+}
 
+export const remove = (req, res, next) => {
+    equipmentsService.remove(req.params.id)
+        .then(rowsAffected => {
+        equals(rowsAffected, 0) ? next() : res.sendStatus(204);
+    })
+    .catch(err => next(assoc('status', 400, err)))
 }

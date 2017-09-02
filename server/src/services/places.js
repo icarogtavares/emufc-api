@@ -18,9 +18,9 @@ export const findById = (id) => {
 
 export const create = (data) => {
   return getModel('place')
-  .then(Place => 
-    Place.create(data)
-  )
+    .then(Place => 
+      Place.create(data)
+    )
 }
 
 export const update = (id, data) => {
