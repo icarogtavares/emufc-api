@@ -1,12 +1,12 @@
-import passport from 'passport'
-import { Strategy, ExtractJwt } from 'passport-jwt'
-import { eqProps, isNil, complement } from 'ramda'
-import jwt from 'jsonwebtoken'
+const passport = require('passport')
+const { Strategy, ExtractJwt } = require('passport-jwt')
+const { eqProps, isNil, complement } = require('ramda')
+const jwt = require('jsonwebtoken')
 
-import db from '../models'
-const { user : User } = db;
+const db = require('../models')
+const { user : User } = db
 
-import cfg from '../config/config';
+const cfg = require('../config/config')
 
 
 const params = {
@@ -16,7 +16,7 @@ const params = {
 
 const isNotNil = complement(isNil);
 
-export default () => {
+module.exports = () => {
 
 	var strategy = new Strategy(params, (payload, done) => {
 		User.findById(payload.id).then(user => {

@@ -1,11 +1,11 @@
-import logger from 'morgan'
-import bodyParser from 'body-parser'
-import helmet from 'helmet'
-import cors from 'cors'
-import express from 'express'
+const logger = require('morgan')
+const bodyParser = require('body-parser')
+const helmet = require('helmet')
+const cors = require('cors')
+const express = require('express')
 
-import routes from '../routes/'
-import auth from './auth'
+const routes = require('../routes/')
+const auth = require('./auth')
 
 export const configureExpress = () => {
   var app = express();
