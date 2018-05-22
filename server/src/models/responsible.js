@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   let responsible = sequelize.define('responsible', {
     name: {
       type: DataTypes.STRING,

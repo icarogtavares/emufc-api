@@ -1,5 +1,5 @@
-import express from 'express'
-import * as placeController from '../controllers/places'
+const express = require('express')
+const placeController = require('../controllers/places')
 
 const router = express.Router();
 
@@ -12,4 +12,4 @@ router.route('/:id')
   .put(placeController.update)
   .delete(placeController.remove)
   
-export default router;
+module.exports = router;

@@ -1,6 +1,6 @@
-import db from '../../../src/models'
-import { empty, assoc } from 'ramda'
-import * as Promise from 'bluebird'
+const db = require('../../../src/models')
+const { empty, assoc } = require('ramda')
+const Promise = require('bluebird')
 const {version: Version, responsible: Responsible, place: Place, equipment: Equipment} = db;
 
 describe('Routes: Equipment', () => {

@@ -1,11 +1,11 @@
-import express from 'express'
-import usersRoutes from './users'
-import placesRoutes from './places'
-import responsiblesRoutes from './responsibles'
-import equipmentsRoutes from './equipments'
-import loginRoutes from './login'
-import versionRoutes from './version'
-import mobileRoutes from './mobile'
+const express = require('express')
+const usersRoutes = require('./users')
+const placesRoutes = require('./places')
+const responsiblesRoutes = require('./responsibles')
+const equipmentsRoutes = require('./equipments')
+const loginRoutes = require('./login')
+const versionRoutes = require('./version')
+const mobileRoutes = require('./mobile')
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router.get('/', (req, res, next) => {
   res.send({index : 'index route'});
 });
 
-export default router;
+module.exports = router;

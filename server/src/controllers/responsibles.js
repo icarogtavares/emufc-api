@@ -1,13 +1,13 @@
-import { assoc, equals, isNil } from 'ramda'
-import * as responsiblesService from '../services/responsibles'
+const { assoc, equals, isNil } = require('ramda')
+const responsiblesService = require('../services/responsibles')
 
-export const findAll = (req, res, next) => {
+const findAll = (req, res, next) => {
     responsiblesService.findAll()
         .then(responsibles => res.send(responsibles))
         .catch(err => next(assoc('status', 400, err)));
 }
 
-export const findOne = (req, res, next) => {
+const findOne = (req, res, next) => {
     responsiblesService.findById(req.params.id)
         .then(responsible => {
             isNil(responsible) ? next() : res.send(responsible);
@@ -15,13 +15,13 @@ export const findOne = (req, res, next) => {
         .catch(err => next(assoc('status', 400, err)));
 }
 
-export const save = (req, res, next) => {
+const save = (req, res, next) => {
     responsiblesService.create(req.body)
         .then(responsible => res.send(responsible))
         .catch(err => next(assoc('status', 400, err)));
 }
 
-export const update = (req, res, next) => {
+const update = (req, res, next) => {
     responsiblesService.update(req.params.id, req.body)
         .then(rowsAffected => {
             equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
@@ -29,10 +29,18 @@ export const update = (req, res, next) => {
         .catch(err => next(assoc('status', 400, err)))
 }
 
-export const remove = (req, res, next) => {
+const remove = (req, res, next) => {
     responsiblesService.remove(req.params.id)
         .then(rowsAffected => {
             equals(rowsAffected, 0) ? next() : res.sendStatus(204);
         })
         .catch(err => next(assoc('status', 400, err)))
+}
+
+module.exports = {
+    findAll,
+    findOne,
+    save,
+    update,
+    remove,
 }

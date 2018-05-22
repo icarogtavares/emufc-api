@@ -1,16 +1,16 @@
-import { assoc, equals, isNil } from 'ramda'
-import jwt from 'jsonwebtoken'
-import { compareSync } from 'bcrypt'
-import * as usersService from '../services/users'
-import cfg from '../config/config'
+const { assoc, equals, isNil } = require('ramda')
+const jwt = require('jsonwebtoken')
+const { compareSync } = require('bcrypt')
+const usersService = require('../services/users')
+const cfg = require('../config/config')
 
-export const findAll = (req, res, next) => {
+const findAll = (req, res, next) => {
   usersService.findAll()
     .then(users => res.send(users))
     .catch(err => next(assoc('status', 400, err)));
 }
 
-export const findOne = (req, res, next) => {
+const findOne = (req, res, next) => {
   usersService.findById(req.params.id)
     .then(user => {
       isNil(user) ? next() : res.send(user);
@@ -18,13 +18,13 @@ export const findOne = (req, res, next) => {
     .catch(err => next(assoc('status', 400, err)));
 }
 
-export const save = (req, res, next) => {
+const save = (req, res, next) => {
   usersService.create(req.body)
     .then(user => res.status(201).send(user))
     .catch(err => next(assoc('status', 400, err)));
 }
 
-export const update = (req, res, next) => {
+const update = (req, res, next) => {
   usersService.update(req.params.id, req.body)
     .then(rowsAffected => {
       equals(rowsAffected[0], 0) ? next() : res.sendStatus(200);
@@ -32,7 +32,7 @@ export const update = (req, res, next) => {
     .catch(err => next(assoc('status', 400, err)))
 }
 
-export const login = (req, res, next) => {
+const login = (req, res, next) => {
 
   usersService.findByUsername(req.body.username)
     .then(user => {
@@ -54,4 +54,12 @@ export const login = (req, res, next) => {
       }
     })
       .catch(err => next(assoc('status', 400, err)));
+}
+
+module.exports = {
+  findAll,
+  findOne,
+  save,
+  update,
+  login,
 }

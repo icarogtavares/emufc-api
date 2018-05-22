@@ -1,5 +1,5 @@
-import express from 'express'
-import * as responsiblesController from '../controllers/responsibles'
+const express = require('express')
+const responsiblesController = require('../controllers/responsibles')
 
 const router = express.Router();
 
@@ -13,4 +13,4 @@ router.route('/:id')
     .delete(responsiblesController.remove);
 
 
-export default router;
+module.exports = router;

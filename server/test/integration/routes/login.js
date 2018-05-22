@@ -1,5 +1,5 @@
-import db from '../../../src/models'
-import { assoc, concat } from 'ramda'
+const db = require('../../../src/models')
+const { assoc, concat } = require('ramda')
 const {user: User} = db;
 
 describe('Routes: Responsible', () => {

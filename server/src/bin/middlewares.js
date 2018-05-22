@@ -7,7 +7,7 @@ const express = require('express')
 const routes = require('../routes/')
 const auth = require('./auth')
 
-export const configureExpress = () => {
+const configureExpress = () => {
   var app = express();
 
   app.set('port', process.env.PORT || '3000');
@@ -49,4 +49,8 @@ export const configureExpress = () => {
   });
 
   return app;
+}
+
+module.exports = {
+  configureExpress,
 }

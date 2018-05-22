@@ -1,6 +1,6 @@
-import { genSaltSync, hashSync } from 'bcrypt'
+const { genSaltSync, hashSync } = require('bcrypt')
 
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   let user = sequelize.define('user', {
     username: {
       type: DataTypes.STRING,

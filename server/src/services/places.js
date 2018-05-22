@@ -1,6 +1,6 @@
-import { getModel } from '../models'
+const { getModel } = require('../models')
 
-export const findAll = () => {
+const findAll = () => {
     return getModel('place')
       .then(Place => 
         Place.findAll({
@@ -8,7 +8,7 @@ export const findAll = () => {
         }))
 }
 
-export const findById = (id) => {
+const findById = (id) => {
   return getModel('place')
     .then(Place => 
       Place.findById(id, {
@@ -16,14 +16,14 @@ export const findById = (id) => {
       }))
 }
 
-export const create = (data) => {
+const create = (data) => {
   return getModel('place')
     .then(Place => 
       Place.create(data)
     )
 }
 
-export const update = (id, data) => {
+const update = (id, data) => {
   return getModel('place')
     .then(Place => 
       Place.update(data, {
@@ -33,7 +33,7 @@ export const update = (id, data) => {
     }))
 }
 
-export const remove = (id) => {
+const remove = (id) => {
   return getModel('place')
     .then(Place => 
       Place.destroy({
@@ -41,4 +41,12 @@ export const remove = (id) => {
         id: id
       }
     }))
+}
+
+module.exports = {
+  findAll,
+  findById,
+  create,
+  update,
+  remove
 }

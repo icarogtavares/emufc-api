@@ -1,11 +1,11 @@
-import { assoc } from 'ramda'
-import * as Promise from 'bluebird'
-import * as equipmentsService from '../services/equipments'
-import * as responsiblesService from '../services/responsibles'
-import * as placesService from '../services/places'
-import * as versionService from '../services/version'
+const { assoc } = require('ramda')
+const Promise = require('bluebird')
+const equipmentsService = require('../services/equipments')
+const responsiblesService = require('../services/responsibles')
+const placesService = require('../services/places')
+const versionService = require('../services/version')
 
-export const findAll = (req, res, next) => {
+const findAll = (req, res, next) => {
     const equipments = equipmentsService.findAll();
     const responsibles = responsiblesService.findAll();
     const places = placesService.findAll();
@@ -24,4 +24,8 @@ export const findAll = (req, res, next) => {
             places: places
         }))
         .catch(err => next(assoc('status', 400, err)));
+}
+
+module.exports = {
+    findAll,
 }

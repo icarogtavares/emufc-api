@@ -1,5 +1,5 @@
-import { assoc, empty } from 'ramda'
-import db from '../../../src/models'
+const { assoc, empty } = require('ramda')
+const db = require('../../../src/models')
 const {responsible: Responsible, equipment: Equipment} = db;
 
 describe('Routes: Responsible', () => {

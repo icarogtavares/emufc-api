@@ -1,6 +1,6 @@
 {
   "name": "emufc-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "engines": {
     "node": "8.11.1"
   },
@@ -15,7 +15,6 @@
   "author": "Icaro Tavares <icarotavares@live.com>",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.0",
     "bcrypt": "^2.0.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",

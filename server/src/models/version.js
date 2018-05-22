@@ -1,4 +1,4 @@
-export default (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   let version = sequelize.define('version', {
     current: DataTypes.INTEGER
   }, {

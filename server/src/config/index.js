@@ -1,7 +1,12 @@
-import { prop } from 'ramda'
+const { prop } = require('ramda')
 
-export const getEnv = env => {
+const getEnv = env => {
     return env || process.env.NODE_ENV || 'test'
 }
 
-export const getConfig = config => env => prop(getEnv(env), config)
+const getConfig = config => env => prop(getEnv(env), config)
+
+module.exports = {
+    getEnv,
+    getConfig,
+}

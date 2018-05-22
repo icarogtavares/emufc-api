@@ -1,5 +1,5 @@
-import db from '../../../src/models'
-import { dissoc, empty, assoc } from 'ramda'
+const db = require=('../../../src/models')
+const { dissoc, empty, assoc } = require=('ramda')
 const {user: User} = db;
 
 describe('Routes: User', () => {

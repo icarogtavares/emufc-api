@@ -1,5 +1,5 @@
-import { inc } from 'ramda'
-import db from '../../../src/models'
+const { inc } = require('ramda')
+const db = require('../../../src/models')
 const {version: Version} = db;
 
 describe('Routes: Responsible', () => {

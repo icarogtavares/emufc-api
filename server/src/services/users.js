@@ -1,6 +1,6 @@
-import { getModel } from '../models'
+const { getModel } = require('../models')
 
-export const findAll = () => {
+const findAll = () => {
     return getModel('user')
         .then(User => 
             User.findAll({
@@ -8,7 +8,7 @@ export const findAll = () => {
         }))
 }
 
-export const findById = (id) => {
+const findById = (id) => {
     return getModel('user')
         .then(User => 
             User.findById(id, {
@@ -16,7 +16,7 @@ export const findById = (id) => {
             }))
 }
 
-export const findByUsername = (username) => {
+const findByUsername = (username) => {
     return getModel('user')
         .then(User => 
             User.findOne({
@@ -26,14 +26,14 @@ export const findByUsername = (username) => {
             }))
 }
 
-export const create = (data) => {
+const create = (data) => {
     return getModel('user')
         .then(User => 
             User.create(data)
         )
 }
 
-export const update = (id, data) => {
+const update = (id, data) => {
     return getModel('user')
         .then(User => 
             User.update(data, {
@@ -43,7 +43,7 @@ export const update = (id, data) => {
             }))
 }
 
-export const updateToken = (id, token) => {
+const updateToken = (id, token) => {
     return getModel('user')
         .then(User =>
             User.update({
@@ -55,7 +55,7 @@ export const updateToken = (id, token) => {
             }))
 }
 
-export const remove = (id) => {
+const remove = (id) => {
     return getModel('user')
         .then(User => 
             User.destroy({
@@ -63,4 +63,14 @@ export const remove = (id) => {
                     id: id
                 }
             }))
+}
+
+module.exports = {
+    findAll,
+    findById,
+    findByUsername,
+    create,
+    update,
+    updateToken,
+    remove,
 }

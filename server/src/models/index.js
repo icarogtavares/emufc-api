@@ -1,8 +1,8 @@
-import fs        from 'fs'
-import path      from 'path'
-import Sequelize from 'sequelize'
-import * as Promise from 'bluebird'
-import getConfig from '../config/database'
+const fs        = require('fs')
+const path      = require('path')
+const Sequelize = require('sequelize')
+const Promise   = require('bluebird')
+const getConfig = require('../config/database')
 
 const basename  = path.basename(module.filename);
 const config = getConfig();
@@ -31,7 +31,7 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = sequelize['import'](path.join(__dirname, file));
+    const model = sequelize['const'](path.join(__dirname, file));
     db[model.name] = model;
   });
 
@@ -48,8 +48,8 @@ if(process.env.NODE_ENV !== 'test') {
   sequelize.sync();
 }
 
-export function getModel(modelName) {
+exports.getModel = (modelName) => {
   return Promise.resolve(db[modelName]);
 }
 
-export default db;
+module.exports = db
