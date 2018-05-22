@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node ./server/src/server.js",
     "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon ./server/src/server.js",
+    "lint": "eslint 'test/**/*.js' 'src/**/*.js'",
     "migrate": "npm run build && sequelize db:migrate",
     "test": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/*.js",
     "loadtest": "NODE_ENV=production loadtest http://localhost:3000/equipments -t 30 -c 12 --rps 100"
@@ -35,6 +36,12 @@
   "devDependencies": {
     "apidoc": "^0.17.6",
     "chai": "^4.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
     "loadtest": "^3.0.3",
     "mocha": "^5.1.1",
     "nodemon": "^1.11.0",
