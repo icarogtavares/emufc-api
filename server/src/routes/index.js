@@ -7,18 +7,18 @@ const loginRoutes = require('./login')
 const versionRoutes = require('./version')
 const mobileRoutes = require('./mobile')
 
-const router = express.Router();
+const router = express.Router()
 
-router.use('/users', usersRoutes);
-router.use('/places', placesRoutes);
-router.use('/responsibles', responsiblesRoutes);
-router.use('/equipments', equipmentsRoutes);
-router.use('/login', loginRoutes);
-router.use('/version', versionRoutes);
-router.use('/mobile', mobileRoutes);
+router.use('/users', usersRoutes)
+router.use('/places', placesRoutes)
+router.use('/responsibles', responsiblesRoutes)
+router.use('/equipments', equipmentsRoutes)
+router.use('/login', loginRoutes)
+router.use('/version', versionRoutes)
+router.use('/mobile', mobileRoutes)
 
 router.get('/', (req, res, next) => {
-  res.send({index : 'index route'});
-});
+  res.send({ index: 'index route' })
+})
 
-module.exports = router;
+module.exports = router

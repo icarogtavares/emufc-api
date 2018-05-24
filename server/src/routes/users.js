@@ -1,7 +1,7 @@
 const express = require('express')
 const usersController = require('../controllers/users')
 
-const router = express.Router();
+const router = express.Router()
 
 router.route('/')
   .get(usersController.findAll)
@@ -10,5 +10,5 @@ router.route('/')
 router.route('/:id')
   .get(usersController.findOne)
   .put(usersController.update)
-  
-module.exports = router;
+
+module.exports = router

@@ -1,9 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
-  let version = sequelize.define('version', {
-    current: DataTypes.INTEGER
+  const version = sequelize.define('version', {
+    current: DataTypes.INTEGER,
   }, {
     timestamps: true,
-    createdAt: false
-  });
-  return version;
-};
+    createdAt: false,
+  })
+  return version
+}

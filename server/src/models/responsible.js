@@ -1,37 +1,37 @@
 module.exports = (sequelize, DataTypes) => {
-  let responsible = sequelize.define('responsible', {
+  const responsible = sequelize.define('responsible', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail : true,
-        notEmpty: true
-      }
+        isEmail: true,
+        notEmpty: true,
+      },
     },
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
-    }
+        notEmpty: true,
+      },
+    },
   }, {
     timestamps: true,
-    paranoid: true
-  });
+    paranoid: true,
+  })
 
-  responsible.associate = models => {
+  responsible.associate = (models) => {
     responsible.hasMany(models.equipment, {
-      foreignKey: 'place_id'
-    });
-  };
+      foreignKey: 'place_id',
+    })
+  }
 
-  return responsible;
-};
+  return responsible
+}
