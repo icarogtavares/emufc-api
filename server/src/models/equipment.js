@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         name: 'place_id',
         allowNull: false,
       },
-      allowNull: false,
     })
     equipment.belongsTo(models.responsible, {
       foreignKey: {

@@ -29,4 +29,4 @@ export const up = (queryInterface, Sequelize) => queryInterface.createTable('res
     type: Sequelize.DATE,
   },
 })
-export const down = (queryInterface, Sequelize) => queryInterface.dropTable('responsible')
+export const down = queryInterface => queryInterface.dropTable('responsible')

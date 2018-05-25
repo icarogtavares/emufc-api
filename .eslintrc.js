@@ -8,7 +8,6 @@ module.exports = {
     "node": true,
   },
   "rules": {
-    "linebreak-style": ["error", process.env.NODE_ENV === 'prod' ? "unix" : "windows"],
     "semi": [2, 'never'],
     'space-before-function-paren': [2, 'always'],
     'max-params': ['error', { max: 3 }],

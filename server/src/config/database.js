@@ -2,14 +2,15 @@ const { getConfig } = require('./index')
 
 const config = getConfig({
   development: {
-    username: process.env.DB_USERNAME || 'root',
+    username: process.env.DB_USERNAME || 'icaro',
     password: process.env.DB_PASSWORD || 'root',
     database: process.env.DB_NAME || 'emufc',
     host: process.env.DB_HOST || '127.0.0.1',
     dialect: 'mysql',
+    logging: false,
   },
   production: {
-    username: process.env.DB_USERNAME || 'root',
+    username: process.env.DB_USERNAME || 'icaro',
     password: process.env.DB_PASSWORD || 'root',
     database: process.env.DB_NAME || 'emufc',
     host: process.env.DB_HOST || '127.0.0.1',
@@ -17,7 +18,7 @@ const config = getConfig({
     logging: false,
   },
   test: {
-    username: process.env.DB_USERNAME || 'root',
+    username: process.env.DB_USERNAME || 'icaro',
     password: process.env.DB_PASSWORD || 'root',
     database: process.env.DB_NAME || 'emufc_test',
     host: process.env.DB_HOST || '127.0.0.1',

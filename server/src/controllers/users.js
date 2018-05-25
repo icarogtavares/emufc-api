@@ -45,7 +45,7 @@ const login = (req, res, next) => {
             if (equals(rowsAffected[0], 0)) {
               throw new Error('Usuário não encontra-se mais no banco.')
             }
-            res.send({ token })
+            return res.send({ token })
           })
       } else {
         throw new Error('Invalid password')

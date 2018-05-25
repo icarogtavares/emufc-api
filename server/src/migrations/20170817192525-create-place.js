@@ -30,4 +30,4 @@ export const up = (queryInterface, Sequelize) => queryInterface.createTable('pla
   },
 })
 
-export const down = (queryInterface, Sequelize) => queryInterface.dropTable('place')
+export const down = queryInterface => queryInterface.dropTable('place')
