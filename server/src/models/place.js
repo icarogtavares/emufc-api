@@ -1,36 +1,36 @@
-export default (sequelize, DataTypes) => {
-  let place = sequelize.define('place', {
+module.exports = (sequelize, DataTypes) => {
+  const place = sequelize.define('place', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     latitude: {
-      type: DataTypes.DECIMAL(10,6),
+      type: DataTypes.DECIMAL(10, 6),
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
+        notEmpty: true,
+      },
     },
     longitude: {
-      type: DataTypes.DECIMAL(10,6),
+      type: DataTypes.DECIMAL(10, 6),
       allowNull: false,
       validate: {
-        notEmpty: true
-      }
-    }
+        notEmpty: true,
+      },
+    },
   }, {
     timestamps: true,
-    paranoid: true
-  });
+    paranoid: true,
+  })
 
-  place.associate = models => {
+  place.associate = (models) => {
     place.hasMany(models.equipment, {
-      foreignKey: 'place_id'
-    });
-  };
+      foreignKey: 'place_id',
+    })
+  }
 
-  return place;
-};
+  return place
+}

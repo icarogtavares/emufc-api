@@ -1,66 +1,61 @@
-import { getModel } from '../models'
+const { getModel } = require('../models')
 
-export const findAll = () => {
-    return getModel('user')
-        .then(User => 
-            User.findAll({
-                attributes:{ exclude: ['password', 'created_at', 'updated_at', 'deleted_at']}
-        }))
-}
+const findAll = () => getModel('user')
+  .then(User =>
+    User.findAll({
+      attributes: { exclude: ['password', 'created_at', 'updated_at', 'deleted_at'] },
+    }))
 
-export const findById = (id) => {
-    return getModel('user')
-        .then(User => 
-            User.findById(id, {
-                attributes : { exclude: ['password', 'created_at', 'updated_at', 'deleted_at'] }
-            }))
-}
+const findById = id => getModel('user')
+  .then(User =>
+    User.findById(id, {
+      attributes: { exclude: ['password', 'created_at', 'updated_at', 'deleted_at'] },
+    }))
 
-export const findByUsername = (username) => {
-    return getModel('user')
-        .then(User => 
-            User.findOne({
-                where: {
-                  username: username
-                }
-            }))
-}
+const findByUsername = username => getModel('user')
+  .then(User =>
+    User.findOne({
+      where: {
+        username,
+      },
+    }))
 
-export const create = (data) => {
-    return getModel('user')
-        .then(User => 
-            User.create(data)
-        )
-}
+const create = data => getModel('user')
+  .then(User =>
+    User.create(data))
 
-export const update = (id, data) => {
-    return getModel('user')
-        .then(User => 
-            User.update(data, {
-                where: {
-                    id: id
-                }
-            }))
-}
+const update = (id, data) => getModel('user')
+  .then(User =>
+    User.update(data, {
+      where: {
+        id,
+      },
+    }))
 
-export const updateToken = (id, token) => {
-    return getModel('user')
-        .then(User =>
-            User.update({
-                access_token: token
-            }, {
-                where : {
-                    id : id
-                }
-            }))
-}
+const updateToken = (id, token) => getModel('user')
+  .then(User =>
+    User.update({
+      access_token: token,
+    }, {
+      where: {
+        id,
+      },
+    }))
 
-export const remove = (id) => {
-    return getModel('user')
-        .then(User => 
-            User.destroy({
-                where: {
-                    id: id
-                }
-            }))
+const remove = id => getModel('user')
+  .then(User =>
+    User.destroy({
+      where: {
+        id,
+      },
+    }))
+
+module.exports = {
+  findAll,
+  findById,
+  findByUsername,
+  create,
+  update,
+  updateToken,
+  remove,
 }

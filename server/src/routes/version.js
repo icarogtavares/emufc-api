@@ -1,11 +1,11 @@
-import express from 'express'
-import * as versionController from '../controllers/version'
+const express = require('express')
+const versionController = require('../controllers/version')
 
-const router = express.Router();
+const router = express.Router()
 
 router.route('/')
-    .get(versionController.currentVersion)
-    .post(versionController.incrementVersion);
+  .get(versionController.currentVersion)
+  .post(versionController.incrementVersion)
 
 
-export default router;
+module.exports = router

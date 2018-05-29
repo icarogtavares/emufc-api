@@ -1,7 +1,7 @@
-import express from 'express'
-import * as usersController from '../controllers/users'
+const express = require('express')
+const usersController = require('../controllers/users')
 
-const router = express.Router();
+const router = express.Router()
 
 router.route('/')
   .get(usersController.findAll)
@@ -10,5 +10,5 @@ router.route('/')
 router.route('/:id')
   .get(usersController.findOne)
   .put(usersController.update)
-  
-export default router;
+
+module.exports = router

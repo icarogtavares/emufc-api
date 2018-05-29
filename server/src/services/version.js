@@ -1,13 +1,14 @@
-import { getModel } from '../models'
+const { getModel } = require('../models')
 
-export const currentVersion = () => {
-    return getModel('version')
-        .then(Version =>
-            Version.findById(1))
-}
+const currentVersion = () => getModel('version')
+  .then(Version =>
+    Version.findById(1))
 
-export const incrementVersion = () => {
-    return getModel('version')
-        .then(Version =>
-            Version.build({id: 1}, {isNewRecord: false}).increment('current'))
+const incrementVersion = () => getModel('version')
+  .then(Version =>
+    Version.build({ id: 1 }, { isNewRecord: false }).increment('current'))
+
+module.exports = {
+  currentVersion,
+  incrementVersion,
 }

@@ -1,8 +1,9 @@
-import supertest from 'supertest'
-import chai from 'chai'
-import { configureExpress } from '../../src/bin/middlewares'
-var app = configureExpress();
+const supertest = require('supertest')
+const chai = require('chai')
+const { configureExpress } = require('../../src/bin/middlewares')
 
-global.app = app;
-global.request = supertest(app);
-global.expect = chai.expect;
+const app = configureExpress()
+
+global.app = app
+global.request = supertest(app)
+global.expect = chai.expect
