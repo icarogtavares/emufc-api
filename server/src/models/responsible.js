@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
   responsible.associate = (models) => {
     responsible.hasMany(models.equipment, {
-      foreignKey: 'place_id',
+      foreignKey: 'responsible_id',
     })
   }
 
