@@ -8,7 +8,8 @@
   "scripts": {
     "start": "node ./src/server.js",
     "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon ./src/server.js",
-    "lint": "eslint src/**/*.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "migrate": "sequelize db:migrate",
     "test": "NODE_ENV=test mocha --opts test/integration/mocha.opts test/integration/**/*.js",
     "loadtest": "NODE_ENV=production loadtest http://localhost:3000/equipments -t 30 -c 12 --rps 100"

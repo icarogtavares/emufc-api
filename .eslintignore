@@ -3,9 +3,7 @@
 /docs/**
 /jsdoc/**
 /templates/**
-/tests/bench/**
-/tests/fixtures/**
-/tests/performance/**
+/test/**
 /tmp/**
 test.js
 !.eslintrc.js
