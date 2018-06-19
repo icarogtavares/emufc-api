@@ -1,5 +1,5 @@
-const db = require = ('../../../src/models')
-const { dissoc, empty, assoc } = require = ('ramda')
+const db = require('../../../src/models')
+const { dissoc, empty, assoc } = require('ramda')
 const { user: User } = db
 
 describe('Routes: User', () => {

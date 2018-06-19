@@ -1,3 +1,4 @@
+require('dotenv').config({ silent: true })
 const supertest = require('supertest')
 const chai = require('chai')
 const { configureExpress } = require('../../src/bin/middlewares')
