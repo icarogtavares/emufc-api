@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node ./src/server.js",
+    "start": "NODE_ENV=production node ./src/server.js",
     "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon ./src/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
