@@ -6,11 +6,11 @@
   },
   "private": true,
   "scripts": {
-    "start": "node ./server/src/server.js",
-    "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon ./server/src/server.js",
-    "lint": "eslint server/src/**/*.js",
-    "migrate": "npm run build && sequelize db:migrate",
-    "test": "NODE_ENV=test mocha --opts server/test/integration/mocha.opts server/test/integration/**/*.js",
+    "start": "node ./src/server.js",
+    "dev": "NODE_ENV=development DEBUG=emufc-api:* nodemon ./src/server.js",
+    "lint": "eslint src/**/*.js",
+    "migrate": "sequelize db:migrate",
+    "test": "NODE_ENV=test mocha --opts test/integration/mocha.opts test/integration/**/*.js",
     "loadtest": "NODE_ENV=production loadtest http://localhost:3000/equipments -t 30 -c 12 --rps 100"
   },
   "author": "Icaro Tavares <icarotavares@live.com>",
