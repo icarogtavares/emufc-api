@@ -17,7 +17,7 @@ const findOne = (req, res, next) => {
 
 const save = (req, res, next) => {
   responsiblesService.create(req.body)
-    .then(responsible => res.send(responsible))
+    .then(responsible => res.status(201).send(responsible))
     .catch(err => next(assoc('status', 400, err)))
 }
 
