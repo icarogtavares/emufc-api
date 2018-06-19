@@ -3,12 +3,12 @@
 // };
 
 module.exports = {
-  "extends": "airbnb-base",
-  "env": {
-    "node": true,
+  extends: 'airbnb-base',
+  env: {
+    node: true,
   },
-  "rules": {
-    "semi": [2, 'never'],
+  rules: {
+    semi: [2, 'never'],
     'space-before-function-paren': [2, 'always'],
     'max-params': ['error', { max: 3 }],
     'comma-dangle': [

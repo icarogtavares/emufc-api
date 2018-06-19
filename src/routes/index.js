@@ -17,6 +17,7 @@ router.use('/login', loginRoutes)
 router.use('/version', versionRoutes)
 router.use('/mobile', mobileRoutes)
 
+// eslint-disable-next-line no-unused-vars
 router.get('/', (req, res, next) => {
   res.send({ index: 'index route' })
 })

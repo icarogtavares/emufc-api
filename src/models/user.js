@@ -34,9 +34,9 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
       paranoid: true,
       hooks: {
-        beforeCreate: (user) => {
+        beforeCreate: (user) => { // eslint-disable-line no-shadow
           const salt = genSaltSync()
-          user.password = hashSync(user.password, salt)
+          user.password = hashSync(user.password, salt) // eslint-disable-line no-param-reassign
         },
       },
     }

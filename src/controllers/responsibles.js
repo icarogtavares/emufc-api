@@ -10,7 +10,7 @@ const findAll = (req, res, next) => {
 const findOne = (req, res, next) => {
   responsiblesService.findById(req.params.id)
     .then((responsible) => {
-      isNil(responsible) ? next() : res.send(responsible)
+      isNil(responsible) ? next() : res.send(responsible) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
@@ -24,7 +24,7 @@ const save = (req, res, next) => {
 const update = (req, res, next) => {
   responsiblesService.update(req.params.id, req.body)
     .then((rowsAffected) => {
-      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200)
+      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
@@ -32,7 +32,7 @@ const update = (req, res, next) => {
 const remove = (req, res, next) => {
   responsiblesService.remove(req.params.id)
     .then((rowsAffected) => {
-      equals(rowsAffected, 0) ? next() : res.sendStatus(204)
+      equals(rowsAffected, 0) ? next() : res.sendStatus(204) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }

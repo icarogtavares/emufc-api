@@ -6,14 +6,14 @@ const placesService = require('../services/places')
 const versionService = require('../services/version')
 
 const findAll = (req, res, next) => {
-  const equipments = equipmentsService.findAll()
-  const responsibles = responsiblesService.findAll()
-  const places = placesService.findAll()
-
   versionService.currentVersion()
     .then((version) => {
       if (version.current > req.get('VERSION')) {
-        return Promise.all([equipments, responsibles, places])
+        return Promise.all([
+          equipmentsService.findAll(),
+          responsiblesService.findAll(),
+          placesService.findAll(),
+        ])
       }
 
       throw new Error('Already up to date.')

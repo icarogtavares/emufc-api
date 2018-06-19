@@ -13,7 +13,7 @@ const findAll = (req, res, next) => {
 const findOne = (req, res, next) => {
   usersService.findById(req.params.id)
     .then((user) => {
-      isNil(user) ? next() : res.send(user)
+      isNil(user) ? next() : res.send(user) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
@@ -27,7 +27,7 @@ const save = (req, res, next) => {
 const update = (req, res, next) => {
   usersService.update(req.params.id, req.body)
     .then((rowsAffected) => {
-      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200)
+      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }

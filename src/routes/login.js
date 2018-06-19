@@ -8,6 +8,6 @@ router.route('/')
   .post(usersController.login)
 
 router.route('/')
-  .get(auth().authenticate(), (req, res, next) => res.send('Auth test OK!'))
+  .get(auth().authenticate(), (req, res, next) => res.send('Auth test OK!')) // eslint-disable-line no-unused-vars
 
 module.exports = router

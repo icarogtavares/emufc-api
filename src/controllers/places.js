@@ -10,7 +10,7 @@ const findAll = (req, res, next) => {
 const findById = (req, res, next) => {
   placesService.findById(req.params.id)
     .then((place) => {
-      isNil(place) ? next() : res.send(place)
+      isNil(place) ? next() : res.send(place) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
@@ -23,7 +23,7 @@ const save = (req, res, next) => {
 const update = (req, res, next) => {
   placesService.update(req.params.id, req.body)
     .then((rowsAffected) => {
-      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200)
+      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
@@ -31,7 +31,7 @@ const update = (req, res, next) => {
 const remove = (req, res, next) => {
   placesService.remove(req.params.id)
     .then((rowsAffected) => {
-      equals(rowsAffected, 0) ? next() : res.sendStatus(204)
+      equals(rowsAffected, 0) ? next() : res.sendStatus(204) // eslint-disable-line no-unused-expressions
     })
     .catch(err => next(assoc('status', 400, err)))
 }
