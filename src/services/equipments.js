@@ -4,7 +4,7 @@ const findAll = () => getModel('equipment')
   .then(Equipment =>
     Equipment.findAll({
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-      include: [{ all: true, nested: true, attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] } }],
+      // include: [{ all: true, nested: true, attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] } }],
     }))
 
 const findById = id => getModel('equipment')
