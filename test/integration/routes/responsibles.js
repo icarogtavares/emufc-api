@@ -92,7 +92,7 @@ describe('Routes: Responsible', () => {
     it('should create a new responsible', (done) => {
       request.post('/responsibles')
         .send(fakeResponsible)
-        .expect(200)
+        .expect(201)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           expect(res.body.name).to.eql(fakeResponsible.name)

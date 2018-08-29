@@ -114,7 +114,7 @@ describe('Routes: Equipment', () => {
     it('should create a new equipment', (done) => {
       request.post('/equipments')
         .send(fakeEquipment)
-        .expect(200)
+        .expect(201)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           expect(res.body.name).to.eql(fakeEquipment.name)
