@@ -159,4 +159,20 @@ describe('Routes: User', () => {
       })
     })
   })
+
+  describe('# DELETE /users/{id}', () => {
+    it('should delete an user', (done) => {
+      request.delete('/users/1')
+        .expect(204, done)
+    })
+
+    describe('- contracts', () => {
+     
+
+      it("shouldn't delete a user that does not exist", (done) => {
+        request.delete('/users/3')
+          .expect(404, done)
+      })
+    })
+  })
 })
