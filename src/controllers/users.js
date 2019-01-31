@@ -32,6 +32,14 @@ const update = (req, res, next) => {
     .catch(err => next(assoc('status', 400, err)))
 }
 
+const remove = (req, res, next) => {
+  usersService.remove(req.params.id)
+    .then((rowsAffected) => {
+      equals(rowsAffected[0], 0) ? next() : res.sendStatus(200) // eslint-disable-line no-unused-expressions
+    })
+    .catch(err => next(assoc('status', 400, err)))
+}
+
 const login = (req, res, next) => {
   usersService.findByUsername(req.body.username)
     .then((user) => {
@@ -59,5 +67,6 @@ module.exports = {
   findOne,
   save,
   update,
+  remove,
   login,
 }
