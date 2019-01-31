@@ -29,9 +29,6 @@ export const up = (queryInterface, Sequelize) => queryInterface.createTable('use
     allowNull: false,
     type: Sequelize.DATE,
   },
-  deleted_at: {
-    type: Sequelize.DATE,
-  },
 })
 export const down = queryInterface => queryInterface.dropTable('user')
 
